@@ -1,0 +1,28 @@
+# Dependencies and builds
+node_modules/
+.next/
+
+# Build files
+*.log
+.npm
+.eslintcache
+
+# Environment variables
+.env*.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local development
+.vercel
+
+# IDE and Editor
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
