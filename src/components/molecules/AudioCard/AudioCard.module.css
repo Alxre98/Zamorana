@@ -1,0 +1,328 @@
+.progressBar {
+  width: 100%;
+  height: 100%;
+  transition: width 0.3s ease-out;
+}
+
+/* Progress bar filled part */
+.progressBarFilled {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #10b981, #059669);
+  transition: width 0.3s ease-out;
+}
+
+/* Progress bar container */
+.progressBarContainer {
+  position: relative;
+  height: 0.25rem;
+  background-color: #f3f4f6; /* bg-gray-100 */
+  border-radius: 9999px; /* rounded-full */
+  overflow: hidden;
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+/* Generate width classes from 0% to 100% */
+.progressWidth0 {
+  width: 0%;
+}
+.progressWidth1 {
+  width: 1%;
+}
+.progressWidth2 {
+  width: 2%;
+}
+.progressWidth3 {
+  width: 3%;
+}
+.progressWidth4 {
+  width: 4%;
+}
+.progressWidth5 {
+  width: 5%;
+}
+.progressWidth6 {
+  width: 6%;
+}
+.progressWidth7 {
+  width: 7%;
+}
+.progressWidth8 {
+  width: 8%;
+}
+.progressWidth9 {
+  width: 9%;
+}
+.progressWidth10 {
+  width: 10%;
+}
+.progressWidth11 {
+  width: 11%;
+}
+.progressWidth12 {
+  width: 12%;
+}
+.progressWidth13 {
+  width: 13%;
+}
+.progressWidth14 {
+  width: 14%;
+}
+.progressWidth15 {
+  width: 15%;
+}
+.progressWidth16 {
+  width: 16%;
+}
+.progressWidth17 {
+  width: 17%;
+}
+.progressWidth18 {
+  width: 18%;
+}
+.progressWidth19 {
+  width: 19%;
+}
+.progressWidth20 {
+  width: 20%;
+}
+.progressWidth21 {
+  width: 21%;
+}
+.progressWidth22 {
+  width: 22%;
+}
+.progressWidth23 {
+  width: 23%;
+}
+.progressWidth24 {
+  width: 24%;
+}
+.progressWidth25 {
+  width: 25%;
+}
+.progressWidth26 {
+  width: 26%;
+}
+.progressWidth27 {
+  width: 27%;
+}
+.progressWidth28 {
+  width: 28%;
+}
+.progressWidth29 {
+  width: 29%;
+}
+.progressWidth30 {
+  width: 30%;
+}
+.progressWidth31 {
+  width: 31%;
+}
+.progressWidth32 {
+  width: 32%;
+}
+.progressWidth33 {
+  width: 33%;
+}
+.progressWidth34 {
+  width: 34%;
+}
+.progressWidth35 {
+  width: 35%;
+}
+.progressWidth36 {
+  width: 36%;
+}
+.progressWidth37 {
+  width: 37%;
+}
+.progressWidth38 {
+  width: 38%;
+}
+.progressWidth39 {
+  width: 39%;
+}
+.progressWidth40 {
+  width: 40%;
+}
+.progressWidth41 {
+  width: 41%;
+}
+.progressWidth42 {
+  width: 42%;
+}
+.progressWidth43 {
+  width: 43%;
+}
+.progressWidth44 {
+  width: 44%;
+}
+.progressWidth45 {
+  width: 45%;
+}
+.progressWidth46 {
+  width: 46%;
+}
+.progressWidth47 {
+  width: 47%;
+}
+.progressWidth48 {
+  width: 48%;
+}
+.progressWidth49 {
+  width: 49%;
+}
+.progressWidth50 {
+  width: 50%;
+}
+.progressWidth51 {
+  width: 51%;
+}
+.progressWidth52 {
+  width: 52%;
+}
+.progressWidth53 {
+  width: 53%;
+}
+.progressWidth54 {
+  width: 54%;
+}
+.progressWidth55 {
+  width: 55%;
+}
+.progressWidth56 {
+  width: 56%;
+}
+.progressWidth57 {
+  width: 57%;
+}
+.progressWidth58 {
+  width: 58%;
+}
+.progressWidth59 {
+  width: 59%;
+}
+.progressWidth60 {
+  width: 60%;
+}
+.progressWidth61 {
+  width: 61%;
+}
+.progressWidth62 {
+  width: 62%;
+}
+.progressWidth63 {
+  width: 63%;
+}
+.progressWidth64 {
+  width: 64%;
+}
+.progressWidth65 {
+  width: 65%;
+}
+.progressWidth66 {
+  width: 66%;
+}
+.progressWidth67 {
+  width: 67%;
+}
+.progressWidth68 {
+  width: 68%;
+}
+.progressWidth69 {
+  width: 69%;
+}
+.progressWidth70 {
+  width: 70%;
+}
+.progressWidth71 {
+  width: 71%;
+}
+.progressWidth72 {
+  width: 72%;
+}
+.progressWidth73 {
+  width: 73%;
+}
+.progressWidth74 {
+  width: 74%;
+}
+.progressWidth75 {
+  width: 75%;
+}
+.progressWidth76 {
+  width: 76%;
+}
+.progressWidth77 {
+  width: 77%;
+}
+.progressWidth78 {
+  width: 78%;
+}
+.progressWidth79 {
+  width: 79%;
+}
+.progressWidth80 {
+  width: 80%;
+}
+.progressWidth81 {
+  width: 81%;
+}
+.progressWidth82 {
+  width: 82%;
+}
+.progressWidth83 {
+  width: 83%;
+}
+.progressWidth84 {
+  width: 84%;
+}
+.progressWidth85 {
+  width: 85%;
+}
+.progressWidth86 {
+  width: 86%;
+}
+.progressWidth87 {
+  width: 87%;
+}
+.progressWidth88 {
+  width: 88%;
+}
+.progressWidth89 {
+  width: 89%;
+}
+.progressWidth90 {
+  width: 90%;
+}
+.progressWidth91 {
+  width: 91%;
+}
+.progressWidth92 {
+  width: 92%;
+}
+.progressWidth93 {
+  width: 93%;
+}
+.progressWidth94 {
+  width: 94%;
+}
+.progressWidth95 {
+  width: 95%;
+}
+.progressWidth96 {
+  width: 96%;
+}
+.progressWidth97 {
+  width: 97%;
+}
+.progressWidth98 {
+  width: 98%;
+}
+.progressWidth99 {
+  width: 99%;
+}
+.progressWidth100 {
+  width: 100%;
+}

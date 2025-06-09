@@ -10,21 +10,21 @@ const featuredSounds = [
     title: "Bosque Tropical",
     description: "Sonidos relajantes de un bosque tropical al amanecer",
     audioSrc: "/sounds/forest.mp3",
-    // imageSrc: "/images/forest.jpg", // Uncomment when you have the image
+    imageSrc: "/images/forest.jpg",
   },
   {
     id: "2",
     title: "Olas del Mar",
     description: "El suave sonido de las olas rompiendo en la orilla",
     audioSrc: "/sounds/ocean.mp3",
-    // imageSrc: "/images/ocean.jpg", // Uncomment when you have the image
+    imageSrc: "/images/ocean.jpg",
   },
   {
     id: "3",
     title: "Lluvia Ligera",
     description: "El relajante sonido de la lluvia cayendo suavemente",
     audioSrc: "/sounds/rain.mp3",
-    // imageSrc: "/images/rain.jpg", // Uncomment when you have the image
+    imageSrc: "/images/rain.jpg",
   },
 ];
 

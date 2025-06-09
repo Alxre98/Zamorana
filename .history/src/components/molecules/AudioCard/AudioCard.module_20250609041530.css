@@ -1,0 +1,12 @@
+.progressBar {
+  width: 100%;
+  height: 100%;
+  transition: width 0.3s ease-out;
+}
+
+/* This class will be applied dynamically */
+.progressBarFilled {
+  height: 100%;
+  background: linear-gradient(to right, #10b981, #059669);
+  transition: width 0.3s ease-out;
+}
