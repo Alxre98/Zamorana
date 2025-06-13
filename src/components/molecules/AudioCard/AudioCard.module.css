@@ -98,6 +98,96 @@
 .progressWidth24 {
   width: 24%;
 }
+
+/* Waveform height classes */
+.waveformHeight2 {
+  height: 0.5rem;
+}
+.waveformHeight4 {
+  height: 1rem;
+}
+.waveformHeight6 {
+  height: 1.5rem;
+}
+.waveformHeight8 {
+  height: 2rem;
+}
+.waveformHeight10 {
+  height: 2.5rem;
+}
+.waveformHeight12 {
+  height: 3rem;
+}
+
+/* Waveform animation styles */
+.waveformContainer {
+  width: 100%;
+  padding: 0 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: flex-end;
+  height: 4rem;
+}
+
+.waveformBar {
+  flex: 1 1 0%;
+  background-color: #d1fae5;
+  border-top-left-radius: 0.125rem;
+  border-top-right-radius: 0.125rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.waveformBar.playing {
+  background-color: #34d399;
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Add specific animation delays for each bar */
+.waveformBar:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.waveformBar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.waveformBar:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.waveformBar:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.waveformBar:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.waveformBar:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.waveformBar:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.waveformBar:nth-child(8) {
+  animation-delay: 0.4s;
+}
+.waveformBar:nth-child(9) {
+  animation-delay: 0.45s;
+}
+.waveformBar:nth-child(10) {
+  animation-delay: 0.5s;
+}
+.waveformBar:nth-child(11) {
+  animation-delay: 0.55s;
+}
 .progressWidth25 {
   width: 25%;
 }

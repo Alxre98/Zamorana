@@ -18,7 +18,8 @@ type IconName =
   | "ChevronDown"
   | "ChevronUp"
   | "User"
-  | "Search";
+  | "Search"
+  | "DotsVertical";
 
 export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, "name"> {
   name: IconName;
@@ -46,6 +47,11 @@ const Icon: React.FC<IconProps> = ({
     // Audio controls
     Play: <path d="M8 5v14l11-7z" />,
     Pause: <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />,
+
+    // UI Elements
+    DotsVertical: (
+      <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+    ),
 
     // Audio info
     Clock: (

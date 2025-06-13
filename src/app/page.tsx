@@ -7,25 +7,25 @@ import { SoundGrid } from "@/components/organisms/SoundGrid";
 const featuredSounds = [
   {
     id: "1",
-    title: "Bosque Tropical",
-    description: "Sonidos relajantes de un bosque tropical al amanecer",
-    audioSrc: "/sounds/forest.mp3",
-    // imageSrc: "/images/forest.jpg", // Uncomment when you have the image
+    title: "Río Norte - Toma 1",
+    description: "Grabación del río Norte en Cañón del Norte, cuenca baja",
+    audioSrc:
+      "/audios/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV1_081124_125938_Tarde.mp3",
   },
   {
     id: "2",
-    title: "Olas del Mar",
-    description: "El suave sonido de las olas rompiendo en la orilla",
-    audioSrc: "/sounds/ocean.mp3",
-    // imageSrc: "/images/ocean.jpg", // Uncomment when you have the image
+    title: "Río Norte - Toma 2",
+    description: "Segunda toma del río Norte en Cañón del Norte, cuenca baja",
+    audioSrc:
+      "/audios/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV2_081124_130539_Tarde.mp3",
   },
   {
     id: "3",
-    title: "Lluvia Ligera",
-    description: "El relajante sonido de la lluvia cayendo suavemente",
-    audioSrc: "/sounds/rain.mp3",
-    // imageSrc: "/images/rain.jpg", // Uncomment when you have the image
-  },
+    title: "Río Norte - Toma 3",
+    description: "Tercera toma del río Norte en Cañón del Norte, cuenca baja",
+    audioSrc:
+      "/audios/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV4_081124_131750_Tarde.mp3",
+  }
 ];
 
 export default function Home() {
