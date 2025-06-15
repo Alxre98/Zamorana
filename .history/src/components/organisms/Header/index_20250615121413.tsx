@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
   ];
 
   const rightNavItems: NavItem[] = [
-    { name: "Contacto", href: "/contact" },
+    { name: "Sonidos", href: "/sounds" },
     { name: "Colecciones", href: "/collections" },
   ];
 
@@ -86,7 +86,7 @@ export const Header: React.FC = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 -ml-2 text-gray-700 hover:text-green-600 transition-colors rounded-md"
               aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-              aria-expanded={isMenuOpen}
+              aria-expanded={isMenuOpen ? "true" : "false"}
             >
               {isMenuOpen ? (
                 <Icon name="Close" className="w-6 h-6" />

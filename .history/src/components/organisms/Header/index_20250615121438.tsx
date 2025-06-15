@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
   ];
 
   const rightNavItems: NavItem[] = [
-    { name: "Contacto", href: "/contact" },
+    { name: "Sonidos", href: "/sounds" },
     { name: "Colecciones", href: "/collections" },
   ];
 
