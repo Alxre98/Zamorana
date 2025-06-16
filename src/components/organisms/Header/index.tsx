@@ -67,8 +67,10 @@ export const Header: React.FC = () => {
 
           {/* Centered Logo */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-black">Zamorana</span>
+            <Link href="/" className="group">
+              <span className="text-2xl font-light tracking-widest text-gray-800 group-hover:text-green-700 transition-colors duration-300">
+                ZAMORANA
+              </span>
             </Link>
           </div>
 
@@ -84,9 +86,9 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 -ml-2 text-gray-700 hover:text-green-600 transition-colors rounded-md"
+              className="p-2 -ml-2 text-gray-600 hover:text-green-700 transition-colors duration-200"
               aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-              aria-expanded={isMenuOpen}
+              aria-expanded={isMenuOpen ? "true" : "false"}
             >
               {isMenuOpen ? (
                 <Icon name="Close" className="w-6 h-6" />

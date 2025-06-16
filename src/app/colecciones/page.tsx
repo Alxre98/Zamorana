@@ -133,21 +133,21 @@ export default function ColeccionesPage() {
       </section>
 
       {/* Contenido de Colecciones */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Colección de Sonidos
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Sumérgete en los sonidos de la naturaleza, capturados en diferentes
-            momentos del día.
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-2xl md:text-3xl font-light text-gray-700 mb-4">
+            Nuestra <span className="text-green-600 font-normal">Colección</span>
+          </h2>
+          <div className="w-16 h-0.5 bg-green-100 mx-auto my-6"></div>
+          <p className="text-gray-500 max-w-2xl mx-auto text-base leading-relaxed">
+            Explora nuestra selección de grabaciones de campo, cuidadosamente capturadas para ofrecerte una experiencia auditiva inmersiva.
           </p>
         </div>
 
         {Object.entries(audioByTimeOfDay).map(([timeOfDay, audios]) => (
-          <section key={timeOfDay} className="mb-16">
-            <div className="border-b border-gray-200 pb-2 mb-8">
-              <h2 className="text-2xl font-semibold text-gray-800">
+          <section key={timeOfDay} className="mb-20">
+            <div className="mb-10 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 inline-flex items-center justify-center px-6 py-2 rounded-full bg-white shadow-sm border border-gray-100">
                 {timeOfDay === "Mañana"
                   ? "🌅 Amanecer"
                   : timeOfDay === "Mediodía"
@@ -156,18 +156,30 @@ export default function ColeccionesPage() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {audios.map((audio) => (
-                <AudioPlayer
-                  key={audio.id}
-                  src={audio.path}
-                  title={audio.title}
-                  description={audio.description}
-                  timeOfDay={audio.timeOfDay as "Mañana" | "Mediodía" | "Tarde"}
-                  location={audio.location}
-                  date={audio.date}
-                />
+                <div key={audio.id} className="h-full">
+                  <AudioPlayer
+                    src={audio.path}
+                    title={audio.title}
+                    description={audio.description}
+                    timeOfDay={audio.timeOfDay as "Mañana" | "Mediodía" | "Tarde"}
+                    location={audio.location}
+                    date={audio.date}
+                  />
+                </div>
               ))}
+              
+              {/* Añadir tarjetas vacías si es necesario para completar la última fila */}
+              {audios.length % 3 === 2 && (
+                <div className="hidden xl:block"></div>
+              )}
+              {audios.length % 3 === 1 && (
+                <>
+                  <div className="hidden xl:block"></div>
+                  <div className="hidden xl:block"></div>
+                </>
+              )}
             </div>
           </section>
         ))}

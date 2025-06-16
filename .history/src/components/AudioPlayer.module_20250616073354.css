@@ -1,0 +1,6 @@
+.progressBar {
+  height: 100%;
+  background-color: #10b981; /* green-500 */
+  border-radius: 9999px;
+  transition: all 0.3s ease-out;
+}
