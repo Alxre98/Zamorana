@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
 
   const rightNavItems: NavItem[] = [
     { name: "Contacto", href: "/contact" },
-    { name: "Colecciones", href: "/collections" },
+    { name: "Colecciones", href: "/colecciones" },
   ];
 
   const handleLinkClick = useCallback(() => {
