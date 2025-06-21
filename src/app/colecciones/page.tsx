@@ -93,41 +93,63 @@ const audioByTimeOfDay = audioFiles.reduce((acc, audio) => {
 
 export default function ColeccionesPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative py-28 md:py-40 lg:py-56 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full">
-          <div className="absolute -top-20 -left-20 w-64 h-64 bg-emerald-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-          <div className="absolute top-0 -right-20 w-64 h-64 bg-green-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-20 left-1/3 w-64 h-64 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white to-emerald-50">
+        {/* Background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/4 -right-1/4 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/leaves-pattern-2.png')] opacity-5"></div>
+          <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/leaves-pattern-3.png')] opacity-5"></div>
+
+          {/* Decorative leaves */}
+          <div className="absolute top-10 left-10 w-32 h-32 text-green-200 opacity-70 transform rotate-12">
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 10C30 10 20 30 20 50c0 20 10 40 30 40s30-20 30-40S70 10 50 10zm0 15c8.3 0 15 6.7 15 15s-6.7 15-15 15-15-6.7-15-15 6.7-15 15-15z" />
+            </svg>
+          </div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 text-emerald-200 opacity-60 transform -rotate-15">
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 90C30 90 10 70 10 50S30 10 50 10s40 20 40 40-20 40-40 40zm0-15c13.8 0 25-11.2 25-25S63.8 25 50 25 25 36.2 25 50s11.2 25 25 25z" />
+            </svg>
+          </div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 text-teal-100 opacity-70 transform rotate-45">
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 10L10 50l40 40 40-40L50 10zm0 20l20 20-20 20-20-20 20-20z" />
+            </svg>
+          </div>
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 mb-6 rounded-full bg-green-50 border-2 border-green-100">
-              <svg
-                className="w-10 h-10 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-6-18a3 3 0 00-3 3v2a3 3 0 003 3h6a3 3 0 003-3V7a3 3 0 00-3-3h-6z"
-                ></path>
-              </svg>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Nuestras <span className="text-green-600">Colecciones</span>
-            </h1>
-            <div className="max-w-3xl mx-auto">
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                Sumérgete en los sonidos de la naturaleza, capturados en diferentes momentos del día.
-              </p>
-            </div>
+        {/* Content */}
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <div className="inline-flex items-center justify-center w-24 h-24 mb-8 rounded-full bg-white/90 backdrop-blur-sm border-2 border-green-100 shadow-lg">
+            <svg
+              className="w-12 h-12 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              ></path>
+            </svg>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+              Explora Nuestras
+            </span>
+            <span className="block">Colecciones</span>
+          </h1>
+
+          <div className="max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+              Sumérgete en los sonidos de la naturaleza, capturados en
+              diferentes momentos del día en los paisajes de Zamora, Venezuela.
+            </p>
           </div>
         </div>
       </section>
@@ -136,11 +158,13 @@ export default function ColeccionesPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="text-center mb-16">
           <h2 className="text-2xl md:text-3xl font-light text-gray-700 mb-4">
-            Nuestra <span className="text-green-600 font-normal">Colección</span>
+            Nuestra{" "}
+            <span className="text-green-600 font-normal">Colección</span>
           </h2>
           <div className="w-16 h-0.5 bg-green-100 mx-auto my-6"></div>
           <p className="text-gray-500 max-w-2xl mx-auto text-base leading-relaxed">
-            Explora nuestra selección de grabaciones de campo, cuidadosamente capturadas para ofrecerte una experiencia auditiva inmersiva.
+            Explora nuestra selección de grabaciones de campo, cuidadosamente
+            capturadas para ofrecerte una experiencia auditiva inmersiva.
           </p>
         </div>
 
@@ -163,13 +187,15 @@ export default function ColeccionesPage() {
                     src={audio.path}
                     title={audio.title}
                     description={audio.description}
-                    timeOfDay={audio.timeOfDay as "Mañana" | "Mediodía" | "Tarde"}
+                    timeOfDay={
+                      audio.timeOfDay as "Mañana" | "Mediodía" | "Tarde"
+                    }
                     location={audio.location}
                     date={audio.date}
                   />
                 </div>
               ))}
-              
+
               {/* Añadir tarjetas vacías si es necesario para completar la última fila */}
               {audios.length % 3 === 2 && (
                 <div className="hidden xl:block"></div>
