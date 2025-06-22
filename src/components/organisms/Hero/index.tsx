@@ -1,38 +1,93 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { DigitalText } from "@/components/atoms/DigitalText";
 
 export const Hero: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-white overflow-hidden font-['Inter']">
       {/* Líneas orgánicas sincronizadas - Inspirado en Nurture */}
-      
+
       {/* Marco exterior sutil */}
       <div className="absolute inset-0 border border-black/10 m-4"></div>
-      
+
       {/* Líneas diagonales principales sincronizadas */}
-      <div className="absolute top-0 left-0 w-full h-px bg-black transform -rotate-15 origin-left" style={{ width: '150%' }}></div>
-      <div className="absolute top-1/3 left-0 w-full h-px bg-black transform rotate-12 origin-left" style={{ width: '150%' }}></div>
-      <div className="absolute top-2/3 left-0 w-full h-px bg-black transform -rotate-8 origin-left" style={{ width: '150%' }}></div>
-      
+      <div
+        className="absolute top-0 left-0 w-full h-px bg-black transform -rotate-15 origin-left"
+        style={{ width: "150%" }}
+      ></div>
+      <div
+        className="absolute top-1/3 left-0 w-full h-px bg-black transform rotate-12 origin-left"
+        style={{ width: "150%" }}
+      ></div>
+      <div
+        className="absolute top-2/3 left-0 w-full h-px bg-black transform -rotate-8 origin-left"
+        style={{ width: "150%" }}
+      ></div>
+
       {/* Líneas verticales rítmicas */}
       <div className="absolute top-0 left-1/4 w-px h-full bg-black/20"></div>
       <div className="absolute top-0 left-1/2 w-px h-full bg-black/30"></div>
       <div className="absolute top-0 right-1/4 w-px h-full bg-black/20"></div>
-      
+
       {/* Líneas de acento que conectan puntos focales */}
       <div className="absolute top-1/4 left-1/4 w-32 h-px bg-black transform -rotate-15 origin-left"></div>
       <div className="absolute top-3/4 right-1/4 w-32 h-px bg-black transform rotate-15 origin-right"></div>
-      
+
       {/* Líneas curvas sutiles */}
       <div className="absolute top-1/3 right-1/4 w-24 h-24 border-t border-r border-black/30 rounded-tr-3xl"></div>
       <div className="absolute bottom-1/3 left-1/4 w-24 h-24 border-b border-l border-black/30 rounded-bl-3xl"></div>
-      
+
       {/* Puntos de intersección */}
       <div className="absolute top-1/2 left-1/2 w-1.5 h-1.5 bg-black rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-black rounded-full"></div>
       <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-black rounded-full"></div>
+
+      {/* Textos digitales flotantes */}
+      <DigitalText
+        text="Naturaleza Pura"
+        position={{ top: "20%", left: "15%" }}
+        delay={1000}
+        size="sm"
+      />
+      <DigitalText
+        text="Sonidos Auténticos"
+        position={{ top: "30%", right: "20%" }}
+        delay={2000}
+        size="xs"
+      />
+      <DigitalText
+        text="Venezuela"
+        position={{ bottom: "30%", left: "20%" }}
+        delay={3000}
+        size="base"
+      />
+      <DigitalText
+        text="Paisajes Sonoros"
+        position={{ bottom: "40%", right: "15%" }}
+        delay={2500}
+        size="sm"
+      />
+      <DigitalText
+        text="Zamora"
+        position={{ top: "60%", right: "25%" }}
+        delay={3500}
+        size="lg"
+        className="font-bold"
+      />
+      <DigitalText
+        text="Guatire"
+        position={{ top: "70%", left: "20%" }}
+        delay={4000}
+        size="sm"
+      />
+      <DigitalText
+        text="2025"
+        position={{ bottom: "20%", right: "20%" }}
+        delay={4500}
+        size="xs"
+      />
 
       {/* Texto de ubicación - Estilo tiny */}
       <div className="absolute bottom-8 left-8 z-20 hidden md:block">
