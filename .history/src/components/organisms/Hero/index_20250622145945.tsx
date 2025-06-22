@@ -3,8 +3,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { DigitalText } from "@/components/atoms/DigitalText";
-// Ruta al archivo de audio en la carpeta public
-const kickSound = "/audio/kick.mp3";
+// @ts-expect-error - Importing audio file
+import kickSound from "@/assets/kick.mp3";
 
 // Extender la interfaz de Window para incluir webkitAudioContext
 declare global {
@@ -29,61 +29,67 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
   const [scale, setScale] = useState(1);
 
   // Add the className prop to the root div's className
-  const rootClassName = `relative min-h-screen max-w-[100vw] overflow-x-hidden bg-white font-['Inter'] ${className}`;
+  const rootClassName = `relative min-h-screen max-w-[100vw] overflow-x-hidden bg-white font-['Inter'] cursor-pointer ${className}`;
 
   useEffect(() => {
-    // Solo inicializar si aún no se ha hecho
-    if (!audioContextRef.current && audioRef.current) {
+    // Configurar el contexto de audio y analizador
+    const initAudio = async () => {
       try {
         // Usar el contexto de audio estándar o el prefijado para Safari
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const audioCtx = new AudioContext();
         const audioAnalyser = audioCtx.createAnalyser();
         audioAnalyser.fftSize = 32;
-
-        // Crear el nodo fuente solo una vez
-        const sourceNode = audioCtx.createMediaElementSource(audioRef.current);
-
-        // Conectar los nodos
-        sourceNode.connect(audioAnalyser);
-        audioAnalyser.connect(audioCtx.destination);
-
-        // Guardar referencias
         audioAnalyserRef.current = audioAnalyser;
-        sourceNodeRef.current = sourceNode;
-        audioContextRef.current = audioCtx;
 
-        // Iniciar el análisis de audio
-        const dataArray = new Uint8Array(audioAnalyser.frequencyBinCount);
+        if (audioRef.current) {
+          sourceNodeRef.current = audioCtx.createMediaElementSource(
+            audioRef.current
+          );
+          sourceNodeRef.current.connect(audioAnalyser);
+          audioAnalyser.connect(audioCtx.destination);
+          audioContextRef.current = audioCtx;
 
-        const tick = () => {
-          if (audioAnalyserRef.current) {
-            audioAnalyserRef.current.getByteFrequencyData(dataArray);
+          // Iniciar el análisis de audio
+          const dataArray = new Uint8Array(audioAnalyser.frequencyBinCount);
+
+          const tick = () => {
+            audioAnalyser.getByteFrequencyData(dataArray);
             const average =
               dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
             // Ajustar la escala basada en el audio (entre 0.95 y 1.1)
             const newScale = 0.95 + (average / 255) * 0.15;
             setScale(newScale);
             animationRef.current = requestAnimationFrame(tick);
-          }
-        };
+          };
 
-        animationRef.current = requestAnimationFrame(tick);
+          animationRef.current = requestAnimationFrame(tick);
+        }
       } catch (error) {
         console.error("Error al inicializar el audio:", error);
       }
-    }
+    };
+
+    initAudio();
 
     return () => {
-      // Limpiar la animación
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
-
-      // No desconectamos los nodos aquí para evitar problemas de reconexión
-      // ya que el efecto se puede ejecutar múltiples veces en desarrollo con React.StrictMode
+      if (sourceNodeRef.current) {
+        sourceNodeRef.current.disconnect();
+      }
+      if (audioAnalyserRef.current) {
+        audioAnalyserRef.current.disconnect();
+      }
+      if (
+        audioContextRef.current &&
+        audioContextRef.current.state !== "closed"
+      ) {
+        audioContextRef.current.close();
+      }
     };
-  }, []); // Este efecto solo se ejecuta una vez al montar el componente
+  }, []);
 
   const handleLogoClick = async () => {
     if (!audioRef.current || !audioContextRef.current) return;
@@ -106,7 +112,13 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
     }
   };
   return (
-    <div className={rootClassName} role="region" aria-label="Hero section">
+    <div
+      className={rootClassName}
+      onClick={handleLogoClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
+    >
       <audio ref={audioRef} src={kickSound} preload="auto" className="hidden" />
       {/* Líneas orgánicas sincronizadas - Inspirado en Nurture */}
 
@@ -231,14 +243,13 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
           <div className="w-full md:w-5/12 lg:w-1/2 text-center md:text-left relative z-20 md:mt-16 px-4">
             <div
               onClick={handleLogoClick}
-              className={`relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto md:mx-0 transition-transform ${
+              className={`relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto md:mx-0 cursor-pointer transition-transform ${
                 isPlaying ? "scale-95 duration-100" : "duration-300"
-              } hover:cursor-pointer`}
+              }`}
               style={{
                 transform: `scale(${isPlaying ? 0.95 : scale})`,
               }}
               role="button"
-              aria-label="Reproducir sonido"
               tabIndex={0}
               onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
             >
@@ -249,7 +260,6 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
                 className="object-contain select-none"
                 priority
                 sizes="(max-width: 768px) 90vw, 60vw"
-                draggable="false"
               />
             </div>
             <div className="mt-2 mb-6 px-4">

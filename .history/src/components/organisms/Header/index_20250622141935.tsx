@@ -24,6 +24,10 @@ export const Header: React.FC = () => {
     { name: "Colecciones", href: "/colecciones" },
   ];
 
+  const handleLinkClick = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
   const isActive = (href: string) => pathname === href;
 
   // Handle mobile link clicks
@@ -32,9 +36,9 @@ export const Header: React.FC = () => {
   }, []);
 
   // Render a navigation link
-  const renderNavLink = (item: NavItem, isMobile = false, index?: number) => (
+  const renderNavLink = (item: NavItem, isMobile = false) => (
     <Link
-      key={`${item.href}-${index || ""}`}
+      key={item.name}
       href={item.href}
       className={`relative group ${
         isMobile ? "block px-6 py-4 text-base" : "text-base py-2.5 px-2"
@@ -46,43 +50,19 @@ export const Header: React.FC = () => {
     >
       {item.name}
       <span
-        className={`absolute left-0 w-full h-3 overflow-hidden transform origin-left transition-all duration-500 ease-out ${
+        className={`absolute left-0 -bottom-1 w-full h-0.5 bg-current transform origin-left transition-all duration-300 ease-out ${
           isActive(item.href)
-            ? "opacity-100"
-            : "opacity-0 group-hover:opacity-100"
+            ? "scale-x-100 opacity-100"
+            : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
         }`}
         style={{
-          bottom: "6px",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 8C3 6 5 4 9 1' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E%0A\")",
+          backgroundSize: "10px 10px",
+          height: "2px",
+          bottom: "4px",
         }}
-      >
-        <svg
-          width="100%"
-          height="12"
-          viewBox="0 0 100 12"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-current"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M2,10 C15,8 25,6 35,9 C45,12 55,10 65,7 C75,4 85,5 98,2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-            className={`transition-all duration-700 ease-in-out ${
-              isActive(item.href)
-                ? "stroke-dashoffset-0"
-                : "stroke-dashoffset-[200%]"
-            }`}
-            style={{
-              strokeDasharray: "100%",
-              strokeDashoffset: isActive(item.href) ? "0%" : "200%",
-            }}
-          />
-        </svg>
-      </span>
+      />
     </Link>
   );
 
@@ -93,60 +73,23 @@ export const Header: React.FC = () => {
           {/* Left Navigation */}
           <nav className="hidden md:flex flex-1 justify-start">
             <div className="flex space-x-8">
-              {leftNavItems.map((item, index) =>
-                renderNavLink(item, false, index)
-              )}
+              {leftNavItems.map((item) => renderNavLink(item))}
             </div>
           </nav>
 
           {/* Centered Logo */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            <Link href="/" className="group relative inline-block">
-              <span className="relative z-10 text-2xl font-light tracking-widest text-gray-800 transition-all duration-300">
+            <Link href="/" className="group">
+              <span className="text-2xl font-light tracking-widest text-gray-800 group-hover:text-green-700 transition-colors duration-300">
                 ZAMORANA
               </span>
-              <div className="absolute -bottom-1 left-0 w-full h-3 overflow-hidden">
-                <svg
-                  width="100%"
-                  height="12"
-                  viewBox="0 0 200 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M5,10 C15,5 30,12 45,6 C60,0 80,10 95,4 C110,-2 130,6 145,2 C160,-2 180,8 195,5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeDasharray="0"
-                    className="animate-draw"
-                    style={{
-                      strokeDasharray: "200",
-                      strokeDashoffset: "200",
-                      animation: "draw 1.2s ease-out forwards",
-                    }}
-                  />
-                </svg>
-              </div>
             </Link>
           </div>
-          <style jsx global>{`
-            @keyframes draw {
-              to {
-                stroke-dashoffset: 0;
-              }
-            }
-          `}</style>
 
           {/* Right Navigation */}
           <nav className="hidden md:flex flex-1 justify-end">
             <div className="flex space-x-8">
-              {rightNavItems.map((item, index) =>
-                renderNavLink(item, false, index)
-              )}
+              {rightNavItems.map((item) => renderNavLink(item))}
             </div>
           </nav>
 
@@ -184,9 +127,7 @@ export const Header: React.FC = () => {
                 <h3 className="px-4 pt-3 pb-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Navegación
                 </h3>
-                {leftNavItems.map((item, index) =>
-                  renderNavLink(item, true, index)
-                )}
+                {leftNavItems.map((item) => renderNavLink(item, true))}
               </div>
 
               {/* Right Navigation - Mobile */}
@@ -194,16 +135,16 @@ export const Header: React.FC = () => {
                 <h3 className="px-4 pt-2 pb-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Explora
                 </h3>
-                {rightNavItems.map((item, index) =>
-                  renderNavLink(item, true, index)
-                )}
+                {rightNavItems.map((item) => renderNavLink(item, true))}
               </div>
 
               {/* Auth Button - Mobile */}
               <div className="pt-2 border-t border-gray-100">
                 <Link
-                  href="/auth/login"
-                  className="block w-full px-6 py-3 text-center text-gray-700 hover:bg-gray-50 font-medium transition-colors duration-200"
+                  href="/login"
+                  className="block w-full mt-2 px-4 py-2 text-base font-medium text-white text-center bg-gradient-to-r from-green-600 to-emerald-500 rounded-md hover:opacity-90 transition-colors"
+                  onClick={handleLinkClick}
+                  aria-label="Iniciar sesión"
                 >
                   Iniciar sesión
                 </Link>

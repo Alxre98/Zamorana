@@ -24,6 +24,10 @@ export const Header: React.FC = () => {
     { name: "Colecciones", href: "/colecciones" },
   ];
 
+  const handleLinkClick = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
   const isActive = (href: string) => pathname === href;
 
   // Handle mobile link clicks
@@ -32,9 +36,9 @@ export const Header: React.FC = () => {
   }, []);
 
   // Render a navigation link
-  const renderNavLink = (item: NavItem, isMobile = false, index?: number) => (
+  const renderNavLink = (item: NavItem, isMobile = false) => (
     <Link
-      key={`${item.href}-${index || ""}`}
+      key={item.name}
       href={item.href}
       className={`relative group ${
         isMobile ? "block px-6 py-4 text-base" : "text-base py-2.5 px-2"
@@ -93,9 +97,7 @@ export const Header: React.FC = () => {
           {/* Left Navigation */}
           <nav className="hidden md:flex flex-1 justify-start">
             <div className="flex space-x-8">
-              {leftNavItems.map((item, index) =>
-                renderNavLink(item, false, index)
-              )}
+              {leftNavItems.map((item) => renderNavLink(item))}
             </div>
           </nav>
 
@@ -144,9 +146,7 @@ export const Header: React.FC = () => {
           {/* Right Navigation */}
           <nav className="hidden md:flex flex-1 justify-end">
             <div className="flex space-x-8">
-              {rightNavItems.map((item, index) =>
-                renderNavLink(item, false, index)
-              )}
+              {rightNavItems.map((item) => renderNavLink(item))}
             </div>
           </nav>
 
@@ -184,9 +184,7 @@ export const Header: React.FC = () => {
                 <h3 className="px-4 pt-3 pb-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Navegación
                 </h3>
-                {leftNavItems.map((item, index) =>
-                  renderNavLink(item, true, index)
-                )}
+                {leftNavItems.map((item) => renderNavLink(item, true))}
               </div>
 
               {/* Right Navigation - Mobile */}
@@ -194,16 +192,16 @@ export const Header: React.FC = () => {
                 <h3 className="px-4 pt-2 pb-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Explora
                 </h3>
-                {rightNavItems.map((item, index) =>
-                  renderNavLink(item, true, index)
-                )}
+                {rightNavItems.map((item) => renderNavLink(item, true))}
               </div>
 
               {/* Auth Button - Mobile */}
               <div className="pt-2 border-t border-gray-100">
                 <Link
-                  href="/auth/login"
-                  className="block w-full px-6 py-3 text-center text-gray-700 hover:bg-gray-50 font-medium transition-colors duration-200"
+                  href="/login"
+                  className="block w-full mt-2 px-4 py-2 text-base font-medium text-white text-center bg-gradient-to-r from-green-600 to-emerald-500 rounded-md hover:opacity-90 transition-colors"
+                  onClick={handleLinkClick}
+                  aria-label="Iniciar sesión"
                 >
                   Iniciar sesión
                 </Link>

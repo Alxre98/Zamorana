@@ -29,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
   const [scale, setScale] = useState(1);
 
   // Add the className prop to the root div's className
-  const rootClassName = `relative min-h-screen max-w-[100vw] overflow-x-hidden bg-white font-['Inter'] ${className}`;
+  const rootClassName = `relative min-h-screen max-w-[100vw] overflow-x-hidden bg-white font-['Inter'] cursor-pointer ${className}`;
 
   useEffect(() => {
     // Solo inicializar si aún no se ha hecho
@@ -106,7 +106,14 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
     }
   };
   return (
-    <div className={rootClassName} role="region" aria-label="Hero section">
+    <div
+      className={rootClassName}
+      onClick={handleLogoClick}
+      role="button"
+      aria-label="Play sound effect"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
+    >
       <audio ref={audioRef} src={kickSound} preload="auto" className="hidden" />
       {/* Líneas orgánicas sincronizadas - Inspirado en Nurture */}
 
@@ -231,14 +238,13 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
           <div className="w-full md:w-5/12 lg:w-1/2 text-center md:text-left relative z-20 md:mt-16 px-4">
             <div
               onClick={handleLogoClick}
-              className={`relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto md:mx-0 transition-transform ${
+              className={`relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto md:mx-0 cursor-pointer transition-transform ${
                 isPlaying ? "scale-95 duration-100" : "duration-300"
-              } hover:cursor-pointer`}
+              }`}
               style={{
                 transform: `scale(${isPlaying ? 0.95 : scale})`,
               }}
               role="button"
-              aria-label="Reproducir sonido"
               tabIndex={0}
               onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
             >
@@ -249,7 +255,6 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
                 className="object-contain select-none"
                 priority
                 sizes="(max-width: 768px) 90vw, 60vw"
-                draggable="false"
               />
             </div>
             <div className="mt-2 mb-6 px-4">

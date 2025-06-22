@@ -249,7 +249,6 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
                 className="object-contain select-none"
                 priority
                 sizes="(max-width: 768px) 90vw, 60vw"
-                draggable="false"
               />
             </div>
             <div className="mt-2 mb-6 px-4">

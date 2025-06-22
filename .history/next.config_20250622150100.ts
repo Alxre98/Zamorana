@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
   // Enable static exports for the standalone output
   output: 'standalone',
   // Add any necessary webpack configuration
-  webpack: (config: Configuration) => {
+  webpack: (config: Configuration, { isServer }: { isServer: boolean }) => {
     // Handle audio files
     if (config.module && config.module.rules) {
       config.module.rules.push({

@@ -1,122 +1,30 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { DigitalText } from "@/components/atoms/DigitalText";
-// Ruta al archivo de audio en la carpeta public
-const kickSound = "/audio/kick.mp3";
 
-// Extender la interfaz de Window para incluir webkitAudioContext
-declare global {
-  interface Window {
-    webkitAudioContext: typeof AudioContext;
-  }
-}
-
-// Define the props interface for better type safety
-interface HeroProps {
-  className?: string;
-}
-
-export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  // Use null as initial value since requestAnimationFrame returns a number
-  const animationRef = useRef<number | null>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const audioAnalyserRef = useRef<AnalyserNode | null>(null);
-  const sourceNodeRef = useRef<MediaElementAudioSourceNode | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [scale, setScale] = useState(1);
-
-  // Add the className prop to the root div's className
-  const rootClassName = `relative min-h-screen max-w-[100vw] overflow-x-hidden bg-white font-['Inter'] ${className}`;
-
-  useEffect(() => {
-    // Solo inicializar si aún no se ha hecho
-    if (!audioContextRef.current && audioRef.current) {
-      try {
-        // Usar el contexto de audio estándar o el prefijado para Safari
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const audioCtx = new AudioContext();
-        const audioAnalyser = audioCtx.createAnalyser();
-        audioAnalyser.fftSize = 32;
-
-        // Crear el nodo fuente solo una vez
-        const sourceNode = audioCtx.createMediaElementSource(audioRef.current);
-
-        // Conectar los nodos
-        sourceNode.connect(audioAnalyser);
-        audioAnalyser.connect(audioCtx.destination);
-
-        // Guardar referencias
-        audioAnalyserRef.current = audioAnalyser;
-        sourceNodeRef.current = sourceNode;
-        audioContextRef.current = audioCtx;
-
-        // Iniciar el análisis de audio
-        const dataArray = new Uint8Array(audioAnalyser.frequencyBinCount);
-
-        const tick = () => {
-          if (audioAnalyserRef.current) {
-            audioAnalyserRef.current.getByteFrequencyData(dataArray);
-            const average =
-              dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-            // Ajustar la escala basada en el audio (entre 0.95 y 1.1)
-            const newScale = 0.95 + (average / 255) * 0.15;
-            setScale(newScale);
-            animationRef.current = requestAnimationFrame(tick);
-          }
-        };
-
-        animationRef.current = requestAnimationFrame(tick);
-      } catch (error) {
-        console.error("Error al inicializar el audio:", error);
-      }
-    }
-
-    return () => {
-      // Limpiar la animación
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-
-      // No desconectamos los nodos aquí para evitar problemas de reconexión
-      // ya que el efecto se puede ejecutar múltiples veces en desarrollo con React.StrictMode
-    };
-  }, []); // Este efecto solo se ejecuta una vez al montar el componente
-
-  const handleLogoClick = async () => {
-    if (!audioRef.current || !audioContextRef.current) return;
-
-    try {
-      if (audioContextRef.current.state === "suspended") {
-        await audioContextRef.current.resume();
-      }
-
-      audioRef.current.currentTime = 0;
-      await audioRef.current.play();
-      setIsPlaying(true);
-
-      // Reset scale after animation
-      setTimeout(() => {
-        setIsPlaying(false);
-      }, 300);
-    } catch (error) {
-      console.error("Error al reproducir el audio:", error);
-    }
-  };
+export const Hero: React.FC = () => {
   return (
-    <div className={rootClassName} role="region" aria-label="Hero section">
-      <audio ref={audioRef} src={kickSound} preload="auto" className="hidden" />
+    <div className="relative min-h-screen max-w-[100vw] overflow-x-hidden bg-white font-['Inter']">
       {/* Líneas orgánicas sincronizadas - Inspirado en Nurture */}
 
       {/* Marco exterior sutil */}
       <div className="absolute inset-0 border border-black/10 m-2 sm:m-4"></div>
 
       {/* Líneas diagonales principales sincronizadas */}
-      <div className="absolute top-0 left-0 w-[150%] h-px bg-black transform -rotate-15 origin-left"></div>
-      <div className="absolute top-1/3 left-0 w-[150%] h-px bg-black transform rotate-12 origin-left"></div>
-      <div className="absolute top-2/3 left-0 w-[150%] h-px bg-black transform -rotate-8 origin-left"></div>
+      <div
+        className="absolute top-0 left-0 w-full h-px bg-black transform -rotate-15 origin-left"
+        style={{ width: "150%" }}
+      ></div>
+      <div
+        className="absolute top-1/3 left-0 w-full h-px bg-black transform rotate-12 origin-left"
+        style={{ width: "150%" }}
+      ></div>
+      <div
+        className="absolute top-2/3 left-0 w-full h-px bg-black transform -rotate-8 origin-left"
+        style={{ width: "150%" }}
+      ></div>
 
       {/* Líneas verticales rítmicas */}
       <div className="absolute top-0 left-1/4 w-px h-full bg-black/20"></div>
@@ -139,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
       {/* Textos digitales flotantes */}
       <div className="hidden md:block">
         <DigitalText
-          text="Zamora"
+          text="Naturaleza Pura"
           position={{ top: "20%", left: "15%" }}
           delay={1000}
           size="sm"
@@ -229,27 +137,14 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
         <div className="flex flex-col md:flex-row items-start justify-center w-full gap-4 md:gap-8 pt-16 md:pt-0 md:items-center">
           {/* Logo y texto */}
           <div className="w-full md:w-5/12 lg:w-1/2 text-center md:text-left relative z-20 md:mt-16 px-4">
-            <div
-              onClick={handleLogoClick}
-              className={`relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto md:mx-0 transition-transform ${
-                isPlaying ? "scale-95 duration-100" : "duration-300"
-              } hover:cursor-pointer`}
-              style={{
-                transform: `scale(${isPlaying ? 0.95 : scale})`,
-              }}
-              role="button"
-              aria-label="Reproducir sonido"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
-            >
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto md:mx-0">
               <Image
                 src="/zamorana-logo.png"
                 alt="Zamorana Logo"
                 fill
-                className="object-contain select-none"
+                className="object-contain"
                 priority
                 sizes="(max-width: 768px) 90vw, 60vw"
-                draggable="false"
               />
             </div>
             <div className="mt-2 mb-6 px-4">
@@ -289,13 +184,6 @@ export const Hero: React.FC<HeroProps> = ({ className = "" }) => {
           </div>
         </div>
       </div>
-
-      {/* Clickable overlay for audio visualization */}
-      <div
-        className={`absolute inset-0 z-10 pointer-events-none transition-transform duration-100 origin-center ${
-          isPlaying ? "scale-[0.98]" : "scale-100"
-        }`}
-      />
     </div>
   );
 };
