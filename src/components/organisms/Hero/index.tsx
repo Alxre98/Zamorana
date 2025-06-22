@@ -6,11 +6,11 @@ import { DigitalText } from "@/components/atoms/DigitalText";
 
 export const Hero: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden font-['Inter']">
+    <div className="relative min-h-screen max-w-[100vw] overflow-x-hidden bg-white font-['Inter']">
       {/* Líneas orgánicas sincronizadas - Inspirado en Nurture */}
 
       {/* Marco exterior sutil */}
-      <div className="absolute inset-0 border border-black/10 m-4"></div>
+      <div className="absolute inset-0 border border-black/10 m-2 sm:m-4"></div>
 
       {/* Líneas diagonales principales sincronizadas */}
       <div
@@ -45,52 +45,54 @@ export const Hero: React.FC = () => {
       <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-black rounded-full"></div>
 
       {/* Textos digitales flotantes */}
-      <DigitalText
-        text="Naturaleza Pura"
-        position={{ top: "20%", left: "15%" }}
-        delay={1000}
-        size="sm"
-      />
-      <DigitalText
-        text="Sonidos Auténticos"
-        position={{ top: "30%", right: "20%" }}
-        delay={2000}
-        size="xs"
-      />
-      <DigitalText
-        text="Venezuela"
-        position={{ bottom: "30%", left: "20%" }}
-        delay={3000}
-        size="base"
-      />
-      <DigitalText
-        text="Paisajes Sonoros"
-        position={{ bottom: "40%", right: "15%" }}
-        delay={2500}
-        size="sm"
-      />
-      <DigitalText
-        text="Zamora"
-        position={{ top: "60%", right: "25%" }}
-        delay={3500}
-        size="lg"
-        className="font-bold"
-      />
-      <DigitalText
-        text="Guatire"
-        position={{ top: "70%", left: "20%" }}
-        delay={4000}
-        size="sm"
-      />
-      <DigitalText
-        text="2025"
-        position={{ bottom: "20%", right: "20%" }}
-        delay={4500}
-        size="xs"
-      />
+      <div className="hidden md:block">
+        <DigitalText
+          text="Naturaleza Pura"
+          position={{ top: "20%", left: "15%" }}
+          delay={1000}
+          size="sm"
+        />
+        <DigitalText
+          text="Sonidos Auténticos"
+          position={{ top: "30%", right: "20%" }}
+          delay={2000}
+          size="xs"
+        />
+        <DigitalText
+          text="Venezuela"
+          position={{ bottom: "30%", left: "20%" }}
+          delay={3000}
+          size="base"
+        />
+        <DigitalText
+          text="Paisajes Sonoros"
+          position={{ bottom: "40%", right: "15%" }}
+          delay={2500}
+          size="sm"
+        />
+        <DigitalText
+          text="Zamora"
+          position={{ top: "60%", right: "25%" }}
+          delay={3500}
+          size="lg"
+          className="font-bold"
+        />
+        <DigitalText
+          text="Guatire"
+          position={{ top: "70%", left: "20%" }}
+          delay={4000}
+          size="sm"
+        />
+        <DigitalText
+          text="2025"
+          position={{ bottom: "20%", right: "20%" }}
+          delay={4500}
+          size="xs"
+        />
+      </div>
 
       {/* Texto de ubicación - Estilo tiny */}
-      <div className="absolute bottom-8 left-8 z-20 hidden md:block">
+      <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 z-20 hidden md:block">
         <div className="text-[8px] leading-[1.2] tracking-wider font-mono text-black/60 uppercase">
           <p>Audios grabados en Zamora,</p>
           <p>Estado Miranda, Venezuela</p>
@@ -104,7 +106,7 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Texto vertical - Lado derecho */}
-      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 hidden md:flex flex-col items-center">
+      <div className="absolute right-4 sm:right-6 md:right-8 top-1/2 transform -translate-y-1/2 z-20 hidden md:flex flex-col items-center">
         <div className="text-[10px] font-mono text-black/60 tracking-widest leading-none [writing-mode:vertical-rl] h-64 flex items-center justify-center">
           <span className="inline-block my-1">V</span>
           <span className="inline-block my-1">E</span>
@@ -131,11 +133,11 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Contenedor principal del hero */}
-      <div className="container mx-auto px-4 h-screen flex items-center justify-center relative z-10">
+      <div className="container mx-auto px-4 h-screen flex items-center justify-center relative z-10 py-16 md:py-0">
         <div className="flex flex-col md:flex-row items-start justify-center w-full gap-4 md:gap-8 pt-16 md:pt-0 md:items-center">
           {/* Logo y texto */}
-          <div className="w-full md:w-5/12 text-center md:text-left relative z-20 md:mt-16">
-            <div className="relative w-72 h-72 mx-auto md:mx-0">
+          <div className="w-full md:w-5/12 lg:w-1/2 text-center md:text-left relative z-20 md:mt-16 px-4">
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto md:mx-0">
               <Image
                 src="/zamorana-logo.png"
                 alt="Zamorana Logo"
@@ -145,12 +147,12 @@ export const Hero: React.FC = () => {
                 sizes="(max-width: 768px) 90vw, 60vw"
               />
             </div>
-            <div className="mt-2 mb-6">
+            <div className="mt-2 mb-6 px-4">
               <p className="inline-block text-center">
-                <span className="text-lg font-sans font-light text-gray-500 align-middle">
+                <span className="text-base md:text-lg font-sans font-light text-gray-500 align-middle">
                   by
                 </span>
-                <span className="text-4xl font-serif italic font-normal text-black align-middle ml-1">
+                <span className="text-3xl md:text-4xl font-serif italic font-normal text-black align-middle ml-1">
                   artikko
                 </span>
               </p>
@@ -159,8 +161,8 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Imagen con superposición */}
-          <div className="w-full md:w-7/12 relative">
-            <div className="relative w-full h-80 md:h-[28rem] overflow-hidden">
+          <div className="w-full md:w-7/12 lg:w-1/2 relative mt-8 md:mt-0">
+            <div className="relative w-full h-64 sm:h-80 md:h-[28rem] overflow-hidden">
               <Image
                 src="https://images.unsplash.com/photo-1539186247735-4fa949e90b00?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Paisaje natural"
