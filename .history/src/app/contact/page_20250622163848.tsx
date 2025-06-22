@@ -5,7 +5,14 @@ export default function ContactPage() {
     <div className="bg-white">
       <ContactHero />
       
-
+      <div className="py-20 px-4 max-w-6xl mx-auto">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+            Estamos aquí para responder tus preguntas y escuchar tus comentarios
+            sobre nuestro proyecto de sonidos naturales de Zamora.
+          </p>
+        </div>
+      </div>
 
       <div id="contact-form"></div>
 
