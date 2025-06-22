@@ -11,14 +11,91 @@ export default function ContactPage() {
     message: "",
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showError, setShowError] = useState(false);
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    
+    if (!value.trim()) {
+      error = 'Este campo es requerido';
+    } else {
+      switch (name) {
+        case 'name':
+          if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value)) {
+            error = 'Solo se permiten letras y espacios';
+          }
+          break;
+        case 'email':
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            error = 'Ingresa un correo electrónico válido';
+          }
+          break;
+        case 'subject':
+          if (value.length < 5) {
+            error = 'El asunto debe tener al menos 5 caracteres';
+          }
+          break;
+        case 'message':
+          if (value.length < 10) {
+            error = 'El mensaje debe tener al menos 10 caracteres';
+          }
+          break;
+      }
+    }
+    
+    return error;
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    
+    // Actualizamos el valor del campo
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }));
+
+    // Validamos el campo y actualizamos los errores
+    if (showError) {
+      const error = validateField(name, value);
+      setErrors(prev => ({
+        ...prev,
+        [name]: error
+      }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowError(true);
+    
+    // Validamos todos los campos
+    const newErrors: Record<string, string> = {};
+    let hasErrors = false;
+    
+    (Object.keys(formData) as Array<keyof typeof formData>).forEach((key) => {
+      const error = validateField(key, formData[key]);
+      if (error) {
+        newErrors[key] = error;
+        hasErrors = true;
+      }
+    });
+    
+    setErrors(newErrors);
+    
+    if (!hasErrors) {
+      // Aquí iría el código para enviar el formulario
+      console.log('Formulario enviado:', formData);
+    } else {
+      // Enfocamos el primer campo con error
+      const firstError = Object.keys(newErrors)[0];
+      if (firstError) {
+        document.getElementById(firstError)?.focus();
+      }
+    }
   };
 
   // Estilos para el autocompletado
@@ -71,7 +148,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <form className="space-y-8">
+              <form className="space-y-8" onSubmit={handleSubmit} noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative">
                     <input
@@ -80,9 +157,15 @@ export default function ContactPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent text-gray-900"
-                      required
+                      className={`w-full px-0 pt-6 pb-2 border-0 border-b ${
+                        showError && errors.name ? 'border-red-500' : 'border-gray-200'
+                      } focus:ring-0 focus:outline-none bg-transparent text-gray-900`}
                     />
+                    {showError && errors.name && (
+                      <div className="mt-1 text-sm text-red-600">
+                        {errors.name}
+                      </div>
+                    )}
                     <label
                       htmlFor="name"
                       className={`absolute left-0 text-sm transition-all duration-200 ${
@@ -102,9 +185,15 @@ export default function ContactPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent text-gray-900"
-                      required
+                      className={`w-full px-0 pt-6 pb-2 border-0 border-b ${
+                        showError && errors.email ? 'border-red-500' : 'border-gray-200'
+                      } focus:ring-0 focus:outline-none bg-transparent text-gray-900`}
                     />
+                    {showError && errors.email && (
+                      <div className="mt-1 text-sm text-red-600">
+                        {errors.email}
+                      </div>
+                    )}
                     <label
                       htmlFor="email"
                       className={`absolute left-0 text-sm transition-all duration-200 ${
@@ -125,9 +214,15 @@ export default function ContactPage() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent text-gray-900"
-                    required
+                    className={`w-full px-0 pt-6 pb-2 border-0 border-b ${
+                      showError && errors.subject ? 'border-red-500' : 'border-gray-200'
+                    } focus:ring-0 focus:outline-none bg-transparent text-gray-900`}
                   />
+                  {showError && errors.subject && (
+                    <div className="mt-1 text-sm text-red-600">
+                      {errors.subject}
+                    </div>
+                  )}
                   <label
                     htmlFor="subject"
                     className={`absolute left-0 text-sm transition-all duration-200 ${
@@ -147,9 +242,15 @@ export default function ContactPage() {
                     rows={3}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent text-gray-900 resize-none"
-                    required
+                    className={`w-full px-0 pt-6 pb-2 border-0 border-b ${
+                      showError && errors.message ? 'border-red-500' : 'border-gray-200'
+                    } focus:ring-0 focus:outline-none bg-transparent text-gray-900 resize-none`}
                   ></textarea>
+                  {showError && errors.message && (
+                    <div className="mt-1 text-sm text-red-600">
+                      {errors.message}
+                    </div>
+                  )}
                   <label
                     htmlFor="message"
                     className={`absolute left-0 text-sm transition-all duration-200 ${
@@ -169,19 +270,28 @@ export default function ContactPage() {
                   >
                     Enviar mensaje
                     <svg
+                      className="ml-2 w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
                     >
                       <path
-                        fillRule="evenodd"
-                        d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                        clipRule="evenodd"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
                       />
                     </svg>
                   </button>
                 </div>
+                
+                {/* Mensaje de error general */}
+                {showError && Object.keys(errors).length > 0 && (
+                  <div className="mt-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700">
+                    <p>Por favor completa todos los campos correctamente.</p>
+                  </div>
+                )}
               </form>
             </div>
 
