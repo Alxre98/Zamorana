@@ -157,36 +157,6 @@ export default function ColeccionesPage() {
             size="sm"
             className="font-mono font-bold text-gray-900"
           />
-
-          {/* Texto vertical izquierda */}
-          <div className="absolute left-8 top-1/2 transform -translate-y-1/2 hidden md:block">
-            <div className="text-xs font-mono font-bold tracking-widest [writing-mode:vertical-rl] transform rotate-180 text-gray-900">
-              PAISAJES SONOROS
-            </div>
-          </div>
-
-          {/* Texto vertical derecha */}
-          <div className="absolute right-8 top-1/2 transform -translate-y-1/2 hidden md:block">
-            <div className="text-xs font-mono font-bold tracking-widest [writing-mode:vertical-rl] text-gray-900">
-              ZAMORA VENEZUELA
-            </div>
-          </div>
-
-          {/* Elementos decorativos */}
-          <div className="absolute bottom-8 left-8 w-32 h-px bg-black opacity-50"></div>
-          <div className="absolute top-8 right-8 w-16 h-16 border border-black opacity-30"></div>
-          <div className="absolute bottom-16 right-16 w-8 h-8 border-t border-r border-black opacity-40"></div>
-
-          {/* Texto de ubicación - Inferior izquierda */}
-          <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-20 hidden md:block">
-            <div className="text-[8px] leading-[1.2] tracking-wider font-mono text-black/70 uppercase">
-              <p>Paisajes sonoros de la región</p>
-              <p>central de Venezuela</p>
-              <div className="h-4"></div>
-              <p>Guatire • Zamora • Miranda</p>
-              <p>2022-2024</p>
-            </div>
-          </div>
         </div>
       </section>
 

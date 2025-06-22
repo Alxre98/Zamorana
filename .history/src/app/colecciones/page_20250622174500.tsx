@@ -1,6 +1,4 @@
-import { getFormattedDate } from "@/lib/utils";
 import AudioPlayer from "@/components/AudioPlayer";
-import { DigitalText } from "@/components/atoms/DigitalText";
 
 // Tipos para los audios
 interface AudioFile {
@@ -13,7 +11,25 @@ interface AudioFile {
   path: string;
 }
 
-// La función getFormattedDate está importada desde @/lib/utils
+// Función para obtener la fecha formateada desde el nombre del archivo
+const getFormattedDate = (dateStr: string) => {
+  const months = [
+    "Ene",
+    "Feb",
+    "Mar",
+    "Abr",
+    "May",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dic",
+  ];
+  const [day, month, year] = dateStr.split("_");
+  return `${day} ${months[parseInt(month) - 1]} ${year}`;
+};
 
 // Datos de ejemplo para los audios (ajusta según tus necesidades)
 const audioFiles: AudioFile[] = [
@@ -79,113 +95,61 @@ export default function ColeccionesPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-screen w-full overflow-hidden bg-white font-['Inter']">
-        {/* Fondo con rayas diagonales */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white to-emerald-50">
+        {/* Background elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-[length:60px_60px] bg-[linear-gradient(45deg,#000_2px,transparent_2px),linear-gradient(-45deg,#000_2px,transparent_2px)] opacity-10"></div>
+          <div className="absolute -top-1/4 -right-1/4 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/leaves-pattern-2.png')] opacity-5"></div>
+          <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/leaves-pattern-3.png')] opacity-5"></div>
+
+          {/* Decorative leaves */}
+          <div className="absolute top-10 left-10 w-32 h-32 text-green-200 opacity-70 transform rotate-12">
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 10C30 10 20 30 20 50c0 20 10 40 30 40s30-20 30-40S70 10 50 10zm0 15c8.3 0 15 6.7 15 15s-6.7 15-15 15-15-6.7-15-15 6.7-15 15-15z" />
+            </svg>
+          </div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 text-emerald-200 opacity-60 transform -rotate-15">
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 90C30 90 10 70 10 50S30 10 50 10s40 20 40 40-20 40-40 40zm0-15c13.8 0 25-11.2 25-25S63.8 25 50 25 25 36.2 25 50s11.2 25 25 25z" />
+            </svg>
+          </div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 text-teal-100 opacity-70 transform rotate-45">
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 10L10 50l40 40 40-40L50 10zm0 20l20 20-20 20-20-20 20-20z" />
+            </svg>
+          </div>
         </div>
 
-        {/* Contenido principal */}
-        <div className="relative h-screen w-full flex items-center justify-center">
-          {/* Contenedor del texto principal */}
-          <div className="relative z-10 text-center px-4 w-full max-w-4xl mx-auto">
-            <h1 className="font-thin tracking-tight uppercase">
-              <span className="block text-5xl md:text-7xl lg:text-8xl mb-2 text-gray-900">
-                Nuestras
-              </span>
-              <span className="relative inline-block px-6 py-3">
-                <span className="relative z-10 text-6xl md:text-8xl lg:text-[7rem] font-light text-white">
-                  COLECCIONES
-                </span>
-                <span className="absolute inset-0 w-full h-full bg-black transform -skew-x-12 -translate-x-1"></span>
-              </span>
-            </h1>
+        {/* Content */}
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <div className="inline-flex items-center justify-center w-24 h-24 mb-8 rounded-full bg-white/90 backdrop-blur-sm border-2 border-green-100 shadow-lg">
+            <svg
+              className="w-12 h-12 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              ></path>
+            </svg>
+          </div>
 
-            {/* Línea decorativa */}
-            <div className="w-48 h-px bg-black/30 mx-auto my-12"></div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+              Explora Nuestras
+            </span>
+            <span className="block">Colecciones</span>
+          </h1>
 
-            {/* Subtítulo */}
-            <p className="text-lg md:text-xl max-w-2xl mx-auto font-light tracking-widest leading-relaxed text-gray-900/90 uppercase">
-              Descubre la riqueza sonora de Zamora, Venezuela
-              <span className="block mt-2 text-sm md:text-base tracking-widest font-normal">
-                a través de nuestras grabaciones de campo en diferentes momentos
-                del día.
-              </span>
+          <div className="max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+              Sumérgete en los sonidos de la naturaleza, capturados en
+              diferentes momentos del día en los paisajes de Zamora, Venezuela.
             </p>
-          </div>
-
-          {/* Textos digitales flotantes con animaciones */}
-          <DigitalText
-            text="SONIDOS"
-            position={{ top: "15%", left: "10%" }}
-            delay={1000}
-            size="base"
-            className="font-mono font-bold opacity-80 text-gray-900"
-          />
-          <DigitalText
-            text="COLECCIONES"
-            position={{ top: "25%", right: "15%" }}
-            delay={1500}
-            size="lg"
-            className="font-mono font-bold text-gray-900"
-          />
-          <DigitalText
-            text="NATURALEZA"
-            position={{ bottom: "30%", left: "15%" }}
-            delay={2000}
-            size="base"
-            className="font-mono font-bold opacity-80 text-gray-900"
-          />
-          <DigitalText
-            text="GRABACIONES"
-            position={{ bottom: "40%", right: "15%" }}
-            delay={2500}
-            size="sm"
-            className="font-mono font-bold text-gray-900"
-          />
-          <DigitalText
-            text="ZAMORA"
-            position={{ top: "60%", right: "25%" }}
-            delay={3000}
-            size="base"
-            className="font-mono font-bold opacity-80 text-gray-900"
-          />
-          <DigitalText
-            text="PAISAJES"
-            position={{ bottom: "20%", right: "20%" }}
-            delay={3500}
-            size="sm"
-            className="font-mono font-bold text-gray-900"
-          />
-
-          {/* Texto vertical izquierda */}
-          <div className="absolute left-8 top-1/2 transform -translate-y-1/2 hidden md:block">
-            <div className="text-xs font-mono font-bold tracking-widest [writing-mode:vertical-rl] transform rotate-180 text-gray-900">
-              PAISAJES SONOROS
-            </div>
-          </div>
-
-          {/* Texto vertical derecha */}
-          <div className="absolute right-8 top-1/2 transform -translate-y-1/2 hidden md:block">
-            <div className="text-xs font-mono font-bold tracking-widest [writing-mode:vertical-rl] text-gray-900">
-              ZAMORA VENEZUELA
-            </div>
-          </div>
-
-          {/* Elementos decorativos */}
-          <div className="absolute bottom-8 left-8 w-32 h-px bg-black opacity-50"></div>
-          <div className="absolute top-8 right-8 w-16 h-16 border border-black opacity-30"></div>
-          <div className="absolute bottom-16 right-16 w-8 h-8 border-t border-r border-black opacity-40"></div>
-
-          {/* Texto de ubicación - Inferior izquierda */}
-          <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-20 hidden md:block">
-            <div className="text-[8px] leading-[1.2] tracking-wider font-mono text-black/70 uppercase">
-              <p>Paisajes sonoros de la región</p>
-              <p>central de Venezuela</p>
-              <div className="h-4"></div>
-              <p>Guatire • Zamora • Miranda</p>
-              <p>2022-2024</p>
-            </div>
           </div>
         </div>
       </section>
