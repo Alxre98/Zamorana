@@ -1,17 +1,23 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 import type { Configuration } from 'webpack';
+import * as path from 'path';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['images.unsplash.com']
   },
-  // Ensure that source maps are generated in production
   productionBrowserSourceMaps: false,
-  // Enable static exports for the standalone output
   output: 'standalone',
-  // Add any necessary webpack configuration
   webpack: (config: Configuration) => {
+    // Resolve path aliases
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@': path.resolve(__dirname, 'src'),
+      };
+    }
+    
     // Handle audio files
     if (config.module && config.module.rules) {
       config.module.rules.push({
