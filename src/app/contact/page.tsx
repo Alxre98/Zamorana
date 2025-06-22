@@ -1,6 +1,52 @@
+"use client";
+
 import { ContactHero } from "@/components/organisms/ContactHero";
+import { useState, useEffect } from "react";
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Estilos para el autocompletado
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.textContent = `
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+        -webkit-text-fill-color: #111827 !important; /* gray-900 */
+      }
+      textarea:-webkit-autofill,
+      textarea:-webkit-autofill:hover,
+      textarea:-webkit-autofill:focus,
+      textarea:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+        -webkit-text-fill-color: #111827 !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   return (
     <div className="bg-white">
       <ContactHero />
@@ -8,7 +54,7 @@ export default function ContactPage() {
       {/* Contact Form Section */}
       <section className="py-16 px-4 max-w-6xl mx-auto">
         <div className="bg-white overflow-hidden">
-          <div className="md:flex border border-gray-100">
+          <div className="md:flex border border-gray-300">
             {/* Left Side - Form */}
             <div className="p-8 md:p-12 md:w-2/3">
               <div className="mb-8">
@@ -32,12 +78,18 @@ export default function ContactPage() {
                       type="text"
                       id="name"
                       name="name"
-                      className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent peer"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent text-gray-900"
                       required
                     />
                     <label
                       htmlFor="name"
-                      className="absolute left-0 top-2 text-gray-500 text-sm transition-all duration-200 peer-focus:text-xs peer-focus:text-gray-600 peer-placeholder-shown:text-base"
+                      className={`absolute left-0 text-sm transition-all duration-200 ${
+                        formData.name
+                          ? "text-xs text-gray-600 top-0"
+                          : "text-gray-500 top-2"
+                      }`}
                     >
                       Nombre completo
                     </label>
@@ -48,12 +100,18 @@ export default function ContactPage() {
                       type="email"
                       id="email"
                       name="email"
-                      className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent peer"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent text-gray-900"
                       required
                     />
                     <label
                       htmlFor="email"
-                      className="absolute left-0 top-2 text-gray-500 text-sm transition-all duration-200 peer-focus:text-xs peer-focus:text-gray-600 peer-placeholder-shown:text-base"
+                      className={`absolute left-0 text-sm transition-all duration-200 ${
+                        formData.email
+                          ? "text-xs text-gray-600 top-0"
+                          : "text-gray-500 top-2"
+                      }`}
                     >
                       Correo electrónico
                     </label>
@@ -65,12 +123,18 @@ export default function ContactPage() {
                     type="text"
                     id="subject"
                     name="subject"
-                    className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent peer"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent text-gray-900"
                     required
                   />
                   <label
                     htmlFor="subject"
-                    className="absolute left-0 top-2 text-gray-500 text-sm transition-all duration-200 peer-focus:text-xs peer-focus:text-gray-600 peer-placeholder-shown:text-base"
+                    className={`absolute left-0 text-sm transition-all duration-200 ${
+                      formData.subject
+                        ? "text-xs text-gray-600 top-0"
+                        : "text-gray-500 top-2"
+                    }`}
                   >
                     Asunto
                   </label>
@@ -81,12 +145,18 @@ export default function ContactPage() {
                     id="message"
                     name="message"
                     rows={3}
-                    className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent peer resize-none"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    className="w-full px-0 pt-6 pb-2 border-0 border-b border-gray-200 focus:ring-0 focus:outline-none bg-transparent text-gray-900 resize-none"
                     required
                   ></textarea>
                   <label
                     htmlFor="message"
-                    className="absolute left-0 top-2 text-gray-500 text-sm transition-all duration-200 peer-focus:text-xs peer-focus:text-gray-600 peer-placeholder-shown:text-base"
+                    className={`absolute left-0 text-sm transition-all duration-200 ${
+                      formData.message
+                        ? "text-xs text-gray-600 top-0"
+                        : "text-gray-500 top-2"
+                    }`}
                   >
                     Mensaje
                   </label>
@@ -95,7 +165,7 @@ export default function ContactPage() {
                 <div className="pt-8">
                   <button
                     type="submit"
-                    className="w-full bg-gray-900 text-white py-4 px-6 font-medium hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 flex items-center justify-center"
+                    className="w-full bg-black text-white py-4 px-6 font-medium hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 flex items-center justify-center cursor-pointer"
                   >
                     Enviar mensaje
                     <svg
