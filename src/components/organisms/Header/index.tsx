@@ -40,17 +40,51 @@ export const Header: React.FC = () => {
     <Link
       key={item.name}
       href={item.href}
-      className={`${
+      className={`relative group ${
         isMobile ? "block px-6 py-4 text-base" : "text-base py-2.5 px-2"
-      } font-medium transition-all whitespace-nowrap ${
-        isActive(item.href)
-          ? "text-green-600 font-semibold"
-          : "text-gray-600 hover:text-green-600"
-      } ${isMobile ? "hover:bg-gray-50" : "hover:opacity-90"}`}
+      } font-medium transition-all whitespace-nowrap text-gray-600 hover:text-gray-900 ${
+        isMobile ? "hover:bg-gray-50" : ""
+      }`}
       onClick={isMobile ? handleMobileLinkClick : undefined}
       aria-current={isActive(item.href) ? "page" : undefined}
     >
       {item.name}
+      <span 
+        className={`absolute left-0 w-full h-3 overflow-hidden transform origin-left transition-all duration-500 ease-out ${
+          isActive(item.href) 
+            ? 'opacity-100' 
+            : 'opacity-0 group-hover:opacity-100'
+        }`}
+        style={{
+          bottom: '6px',
+        }}
+      >
+        <svg 
+          width="100%" 
+          height="12" 
+          viewBox="0 0 100 12" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+          className="text-current"
+          preserveAspectRatio="none"
+        >
+          <path 
+            d="M2,10 C15,8 25,6 35,9 C45,12 55,10 65,7 C75,4 85,5 98,2" 
+            stroke="currentColor" 
+            strokeWidth="1.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+            className={`transition-all duration-700 ease-in-out ${
+              isActive(item.href) ? 'stroke-dashoffset-0' : 'stroke-dashoffset-[200%]'
+            }`}
+            style={{
+              strokeDasharray: '100%',
+              strokeDashoffset: isActive(item.href) ? '0%' : '200%',
+            }}
+          />
+        </svg>
+      </span>
     </Link>
   );
 
@@ -67,12 +101,45 @@ export const Header: React.FC = () => {
 
           {/* Centered Logo */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            <Link href="/" className="group">
-              <span className="text-2xl font-light tracking-widest text-gray-800 group-hover:text-green-700 transition-colors duration-300">
+            <Link href="/" className="group relative inline-block">
+              <span className="relative z-10 text-2xl font-light tracking-widest text-gray-800 transition-all duration-300">
                 ZAMORANA
               </span>
+              <div className="absolute -bottom-1 left-0 w-full h-3 overflow-hidden">
+                <svg 
+                  width="100%" 
+                  height="12" 
+                  viewBox="0 0 200 12" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  preserveAspectRatio="none"
+                >
+                  <path 
+                    d="M5,10 C15,5 30,12 45,6 C60,0 80,10 95,4 C110,-2 130,6 145,2 C160,-2 180,8 195,5" 
+                    stroke="currentColor" 
+                    strokeWidth="1.5" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    strokeDasharray="0"
+                    className="animate-draw"
+                    style={{
+                      strokeDasharray: '200',
+                      strokeDashoffset: '200',
+                      animation: 'draw 1.2s ease-out forwards'
+                    }}
+                  />
+                </svg>
+              </div>
             </Link>
           </div>
+          <style jsx global>{`
+            @keyframes draw {
+              to {
+                stroke-dashoffset: 0;
+              }
+            }
+          `}</style>
 
           {/* Right Navigation */}
           <nav className="hidden md:flex flex-1 justify-end">
