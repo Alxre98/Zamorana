@@ -3,6 +3,7 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import { Header } from "../../organisms/Header";
+import { Footer } from "../../organisms/Footer";
 
 interface DefaultTemplateProps {
   children: ReactNode;
@@ -33,14 +34,7 @@ export const DefaultTemplate: React.FC<DefaultTemplateProps> = ({
 
       <main className="flex-grow">{children}</main>
 
-      <footer className="bg-white border-t border-gray-200">
-        <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-          <p className="text-center text-base text-gray-500">
-            &copy; {new Date().getFullYear()} Zamorana. Todos los derechos
-            reservados.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { DigitalText } from "@/components/atoms/DigitalText";
 
 export const Hero: React.FC = () => {
   return (
@@ -43,51 +42,6 @@ export const Hero: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 w-1.5 h-1.5 bg-black rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-black rounded-full"></div>
       <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-black rounded-full"></div>
-
-      {/* Textos digitales flotantes */}
-      <DigitalText
-        text="Naturaleza Pura"
-        position={{ top: "20%", left: "15%" }}
-        delay={1000}
-        size="sm"
-      />
-      <DigitalText
-        text="Sonidos Auténticos"
-        position={{ top: "30%", right: "20%" }}
-        delay={2000}
-        size="xs"
-      />
-      <DigitalText
-        text="Venezuela"
-        position={{ bottom: "30%", left: "20%" }}
-        delay={3000}
-        size="base"
-      />
-      <DigitalText
-        text="Paisajes Sonoros"
-        position={{ bottom: "40%", right: "15%" }}
-        delay={2500}
-        size="sm"
-      />
-      <DigitalText
-        text="Zamora"
-        position={{ top: "60%", right: "25%" }}
-        delay={3500}
-        size="lg"
-        className="font-bold"
-      />
-      <DigitalText
-        text="Guatire"
-        position={{ top: "70%", left: "20%" }}
-        delay={4000}
-        size="sm"
-      />
-      <DigitalText
-        text="2025"
-        position={{ bottom: "20%", right: "20%" }}
-        delay={4500}
-        size="xs"
-      />
 
       {/* Texto de ubicación - Estilo tiny */}
       <div className="absolute bottom-8 left-8 z-20 hidden md:block">

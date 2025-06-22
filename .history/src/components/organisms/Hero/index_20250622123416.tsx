@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { DigitalText } from "@/components/atoms/DigitalText";
 
@@ -83,7 +83,7 @@ export const Hero: React.FC = () => {
         size="sm"
       />
       <DigitalText
-        text="2025"
+        text="2024"
         position={{ bottom: "20%", right: "20%" }}
         delay={4500}
         size="xs"

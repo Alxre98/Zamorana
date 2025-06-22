@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./DigitalText.module.css";
 
 interface DigitalTextProps {
   text: string;
@@ -24,6 +23,13 @@ export const DigitalText: React.FC<DigitalTextProps> = ({
   const [currentText, setCurrentText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const sizeClasses = {
+    xs: "text-xs",
+    sm: "text-sm",
+    base: "text-base",
+    lg: "text-lg",
+  };
 
   useEffect(() => {
     const typeSpeed = 100; // Velocidad de escritura (ms)
@@ -71,18 +77,13 @@ export const DigitalText: React.FC<DigitalTextProps> = ({
 
   if (!visible) return null;
 
-  const sizeClassMap = {
-    xs: styles.textXs,
-    sm: styles.textSm,
-    base: styles.textBase,
-    lg: styles.textLg,
-  };
-
   return (
     <div
-      className={`${styles.digitalText} ${sizeClassMap[size]} ${className}`}
+      className={`absolute font-mono text-black/70 ${sizeClasses[size]} ${className} transition-opacity duration-1000`}
       style={{
         ...position,
+        textShadow: "0 0 8px rgba(0,0,0,0.2)",
+        whiteSpace: "nowrap",
         opacity: visible ? 1 : 0,
       }}
     >

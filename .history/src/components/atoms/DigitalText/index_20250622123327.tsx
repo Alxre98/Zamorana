@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import styles from "./DigitalText.module.css";
+import { useEffect, useState } from 'react';
 
 interface DigitalTextProps {
   text: string;
   position: { top?: string; right?: string; bottom?: string; left?: string };
   delay?: number;
   duration?: number;
-  size?: "xs" | "sm" | "base" | "lg";
+  size?: 'xs' | 'sm' | 'base' | 'lg';
   className?: string;
 }
 
@@ -17,19 +16,27 @@ export const DigitalText: React.FC<DigitalTextProps> = ({
   position,
   delay = 0,
   duration = 3000,
-  size = "xs",
-  className = "",
+  size = 'xs',
+  className = '',
 }) => {
   const [visible, setVisible] = useState(false);
-  const [currentText, setCurrentText] = useState("");
+  const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const sizeClasses = {
+    xs: 'text-xs',
+    sm: 'text-sm',
+    base: 'text-base',
+    lg: 'text-lg',
+  };
 
   useEffect(() => {
     const typeSpeed = 100; // Velocidad de escritura (ms)
     const deleteSpeed = 50; // Velocidad de borrado (ms)
-    const pauseBeforeDelete = duration; // Usa la prop duration para la pausa antes de borrar
+    const pauseBeforeDelete = 2000; // Pausa antes de borrar (ms)
     const pauseBetweenCycles = 3000; // Pausa entre ciclos (ms)
+
 
     let timeout: NodeJS.Timeout;
 
@@ -48,7 +55,7 @@ export const DigitalText: React.FC<DigitalTextProps> = ({
         timeout = setTimeout(() => {
           setIsDeleting(false);
           setCurrentIndex(0);
-          setCurrentText("");
+          setCurrentText('');
         }, pauseBetweenCycles);
       }
     } else {
@@ -67,22 +74,17 @@ export const DigitalText: React.FC<DigitalTextProps> = ({
     }
 
     return () => clearTimeout(timeout);
-  }, [currentIndex, delay, isDeleting, text, visible, duration]);
+  }, [currentIndex, delay, isDeleting, text, visible]);
 
   if (!visible) return null;
 
-  const sizeClassMap = {
-    xs: styles.textXs,
-    sm: styles.textSm,
-    base: styles.textBase,
-    lg: styles.textLg,
-  };
-
   return (
-    <div
-      className={`${styles.digitalText} ${sizeClassMap[size]} ${className}`}
+    <div 
+      className={`absolute font-mono text-black/70 ${sizeClasses[size]} ${className} transition-opacity duration-1000`}
       style={{
         ...position,
+        textShadow: '0 0 8px rgba(0,0,0,0.2)',
+        whiteSpace: 'nowrap',
         opacity: visible ? 1 : 0,
       }}
     >
