@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import styles from "./AudioContainer.module.css";
 import { useAudioPlayer } from "@/context/AudioPlayerContext";
 
@@ -160,7 +160,7 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
         >
           <div
             className={styles.progressBar}
-            style={{ width: `${progress}%` }}
+            style={{ '--progress': `${progress}%` } as React.CSSProperties}
           ></div>
         </div>
         <div className={styles.time}>
@@ -168,33 +168,44 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
         </div>
       </div>
 
-      {/* Onda de sonido profesional mejorada */}
+      {/* Onda de sonido */}
       <div className={styles.soundwave}>
-        <div className={styles.waveform}>
-          <div className={styles.waveGradient}></div>
-          <div className={styles.waveBars}>
-            {Array.from({ length: 48 }).map((_, i) => {
-              // Crear un patrón más orgánico para las alturas
-              const height = 15 + Math.sin(i * 0.5) * 20 + Math.random() * 15;
-              return (
-                <div
-                  key={i}
-                  className={`${styles.waveBar} ${styles[`bar${(i % 8) + 1}`]}`}
-                  style={
-                    {
-                      "--delay": `${i * 0.03}s`,
-                      "--height": `${height}%`,
-                      "--opacity": 0.3 + (i % 3) * 0.2,
-                      "--scale": 0.6 + (i % 5) * 0.1,
-                    } as React.CSSProperties
-                  }
+        <div className={styles.waveBars}>
+          {useMemo(() => {
+            // Reducir el número de barras para que se vean mejor con el ancho completo
+            const barCount = 30;
+            const bars = [];
+            
+            for (let i = 0; i < barCount; i++) {
+              // Usar una función hash simple para generar valores consistentes
+              const hash = (i * 9301 + 49297) % 233280;
+              const random = hash / 233280; // Valor entre 0 y 1
+              
+              // Crear un patrón de onda más pronunciado
+              const baseHeight = 20 + random * 60; // Base entre 20% y 80%
+              
+              // Aplicar un patrón de onda más pronunciado
+              const wavePattern = Math.sin((i / barCount) * Math.PI * 2) * 0.5 + 1;
+              const finalHeight = Math.min(95, Math.max(5, baseHeight * wavePattern));
+              
+              // Retraso para el efecto de onda
+              const delay = `${(i * 0.03)}s`;
+              
+              bars.push(
+                <div 
+                  key={i} 
+                  className={styles.waveBar}
+                  style={{
+                    '--delay': delay,
+                    '--height': `${finalHeight}%`,
+                  } as React.CSSProperties}
                 >
-                  <div className={styles.waveBarInner}></div>
+                  <div className={styles.waveBarInner} />
                 </div>
               );
-            })}
-          </div>
-          <div className={styles.waveReflection}></div>
+            }
+            return bars;
+          }, [])}
         </div>
       </div>
     </div>
