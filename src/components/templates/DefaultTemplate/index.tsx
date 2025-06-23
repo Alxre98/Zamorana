@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import Head from "next/head";
 import { Header } from "../../organisms/Header";
 import { Footer } from "../../organisms/Footer";
+import { AudioPlayerProvider } from "@/context/AudioPlayerContext";
 
 interface DefaultTemplateProps {
   children: ReactNode;
@@ -25,16 +26,18 @@ export const DefaultTemplate: React.FC<DefaultTemplateProps> = ({
     }
   }, [title, description]);
   return (
-    <div className="min-h-screen flex flex-col">
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-      </Head>
-      <Header />
+    <AudioPlayerProvider>
+      <div className="min-h-screen flex flex-col">
+        <Head>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+        </Head>
+        <Header />
 
-      <main className="flex-grow">{children}</main>
-
-      <Footer />
-    </div>
+        <main className="flex-grow">{children}</main>
+        
+        <Footer />
+      </div>
+    </AudioPlayerProvider>
   );
 };

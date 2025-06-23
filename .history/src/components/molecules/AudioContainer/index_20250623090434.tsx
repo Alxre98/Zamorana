@@ -28,7 +28,7 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
   date,
   className = "",
 }) => {
-  const { activePlayer, playAudio, pauseAudio } = useAudioPlayer();
+  const { activePlayer, setActivePlayer } = useAudioPlayer();
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -36,41 +36,39 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
   const progressContainerRef = useRef<HTMLDivElement>(null);
   const playerId = useRef(`player-${Math.random().toString(36).substr(2, 9)}`).current;
 
-  // Efecto para sincronizar el estado de reproducción con el contexto
-  useEffect(() => {
-    // Si este es el reproductor activo, reproducir
-    if (activePlayer === playerId) {
-      if (!isPlaying) {
-        setIsPlaying(true);
-      }
-    } else {
-      // Si hay otro reproductor activo, pausar este
-      if (isPlaying) {
-        setIsPlaying(false);
-      }
-    }
-  }, [activePlayer, playerId]);
-
   // Actualizar el tiempo actual cuando el audio está reproduciéndose
   useEffect(() => {
     // Solo ejecutar en el cliente
     if (typeof window === 'undefined') return;
     
     if (isPlaying) {
+      // Establecer este reproductor como activo
+      setActivePlayer(playerId);
+      
       const timer = setInterval(() => {
         setCurrentTime(prev => {
           const newTime = prev + 0.5; // Actualizar cada 500ms
           if (newTime >= duration) {
             setIsPlaying(false);
-            pauseAudio();
+            setActivePlayer(null);
             return duration;
           }
           return newTime;
         });
       }, 500);
       return () => clearInterval(timer);
+    } else if (activePlayer === playerId) {
+      // Si este era el reproductor activo pero se pausó
+      setActivePlayer(null);
     }
-  }, [isPlaying, duration, pauseAudio]);
+  }, [isPlaying, duration, activePlayer, playerId, setActivePlayer]);
+  
+  // Efecto para pausar este reproductor si se activa otro
+  useEffect(() => {
+    if (activePlayer !== null && activePlayer !== playerId && isPlaying) {
+      setIsPlaying(false);
+    }
+  }, [activePlayer, playerId, isPlaying]);
 
   // Actualizar el progreso basado en el tiempo actual
   useEffect(() => {
@@ -78,12 +76,13 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
   }, [currentTime, duration]);
 
   const togglePlayPause = () => {
-    if (isPlaying && activePlayer === playerId) {
-      // Si se hace clic en el reproductor que ya está reproduciéndose, pausar
-      pauseAudio();
+    if (activePlayer === playerId) {
+      // Si se hace clic en el reproductor que ya está activo, simplemente alterna
+      setIsPlaying(!isPlaying);
     } else {
-      // Si se hace clic en un reproductor que no está reproduciéndose, reproducir este
-      playAudio(playerId);
+      // Si se hace clic en un reproductor diferente, pausa el actual y reproduce el nuevo
+      setIsPlaying(true);
+      // El efecto secundario se encargará de actualizar el activePlayer
     }
   };
 
