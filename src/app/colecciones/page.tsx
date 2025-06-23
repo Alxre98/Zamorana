@@ -1,6 +1,9 @@
+"use client";
+
 import { getFormattedDate } from "@/lib/utils";
-import AudioPlayer from "@/components/AudioPlayer";
+import { AudioContainer } from "@/components/molecules/AudioContainer";
 import { DigitalText } from "@/components/atoms/DigitalText";
+import styles from "./page.module.css";
 
 // Tipos para los audios
 interface AudioFile {
@@ -15,36 +18,45 @@ interface AudioFile {
 
 // La función getFormattedDate está importada desde @/lib/utils
 
-// Datos de ejemplo para los audios (ajusta según tus necesidades)
+// Datos de ejemplo para los audios
 const audioFiles: AudioFile[] = [
   // Mañana
   {
     id: "m1",
     title: "Amanecer en La Churca",
     description:
-      "Sonidos del amanecer en el Río Norte, capturando el despertar de la naturaleza.",
+      "Sonidos del amanecer en el Río Norte, capturando el despertar de la naturaleza con el canto de las aves y el suave murmullo del agua.",
     timeOfDay: "Mañana",
     location: "La Churca",
     date: getFormattedDate("08_11_2024"),
-    path: "/audios/LaChurca_RíoPacairigua_CuencaAlta_TomaV1_130924_111342_Mañana/audio.mp3",
+    path: "",
   },
   {
     id: "m2",
     title: "Cascada Matinal",
     description:
-      "El sonido relajante de la cascada en las primeras horas de la mañana.",
+      "El sonido relajante de la cascada en las primeras horas de la mañana, con el agua cayendo sobre las rocas y el bosque despertando.",
     timeOfDay: "Mañana",
     location: "Waraira Repano",
     date: getFormattedDate("10_05_2025"),
-    path: "/audios/WarairaRepano_RuinasHaciendaElNorte_TomaV1_100525_114409_Mañana/audio.mp3",
+    path: "",
   },
-  // Agrega más audios de mañana...
+  {
+    id: "m3",
+    title: "Bosque al Amanecer",
+    description:
+      "Los primeros rayos de sol filtrándose entre los árboles, acompañados por el crujido de las hojas y los primeros cantos de aves.",
+    timeOfDay: "Mañana",
+    location: "Parque Nacional El Ávila",
+    date: getFormattedDate("15_06_2025"),
+    path: "",
+  },
 
   // Mediodía
   {
     id: "md1",
     title: "Río al Mediodía",
-    description: "El sonido del río en su punto más activo del día.",
+    description: "El sonido del río en su punto más activo del día, con el agua fluyendo vigorosamente entre las rocas.",
     timeOfDay: "Mediodía",
     location: "La Churca",
     date: getFormattedDate("16_10_2024"),
@@ -67,7 +79,7 @@ const audioFiles: AudioFile[] = [
 ];
 
 // Agrupar audios por franja horaria
-const audioByTimeOfDay = audioFiles.reduce((acc, audio) => {
+const audiosByTimeOfDay = audioFiles.reduce((acc, audio) => {
   if (!acc[audio.timeOfDay]) {
     acc[audio.timeOfDay] = [];
   }
@@ -194,57 +206,46 @@ export default function ColeccionesPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="text-center mb-16">
           <h2 className="text-2xl md:text-3xl font-light text-gray-700 mb-4">
-            Nuestra{" "}
-            <span className="text-green-600 font-normal">Colección</span>
+            Nuestra Colección
           </h2>
-          <div className="w-16 h-0.5 bg-green-100 mx-auto my-6"></div>
-          <p className="text-gray-500 max-w-2xl mx-auto text-base leading-relaxed">
-            Explora nuestra selección de grabaciones de campo, cuidadosamente
-            capturadas para ofrecerte una experiencia auditiva inmersiva.
+          <p className="text-gray-500 max-w-2xl mx-auto">
+            Explora los sonidos de la naturaleza en diferentes momentos del día
           </p>
         </div>
 
-        {Object.entries(audioByTimeOfDay).map(([timeOfDay, audios]) => (
-          <section key={timeOfDay} className="mb-20">
-            <div className="mb-10 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 inline-flex items-center justify-center px-6 py-2 rounded-full bg-white shadow-sm border border-gray-100">
-                {timeOfDay === "Mañana"
-                  ? "🌅 Amanecer"
-                  : timeOfDay === "Mediodía"
-                  ? "☀️ Mediodía"
-                  : "🌇 Tarde/Noche"}
-              </h2>
-            </div>
+        <div className="space-y-20">
+          {Object.entries(audiosByTimeOfDay).map(([timeOfDay, audios]) => (
+            <section key={timeOfDay} className="relative">
+              <div className="flex items-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 inline-block relative pr-6 bg-white z-10">
+                  {timeOfDay === "Mañana"
+                    ? " Amanecer"
+                    : timeOfDay === "Mediodía"
+                    ? " Mediodía"
+                    : " Tarde/Noche"}
+                </h2>
+                <div className="flex-grow h-px bg-gray-200 ml-4"></div>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {audios.map((audio) => (
-                <div key={audio.id} className="h-full">
-                  <AudioPlayer
-                    src={audio.path}
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {audios.map((audio) => (
+                  <AudioContainer
+                    key={audio.id}
                     title={audio.title}
                     description={audio.description}
-                    timeOfDay={
-                      audio.timeOfDay as "Mañana" | "Mediodía" | "Tarde"
-                    }
+                    timeOfDay={audio.timeOfDay}
                     location={audio.location}
                     date={audio.date}
+                    className="hover:shadow-lg transition-shadow duration-300"
                   />
-                </div>
-              ))}
+                ))}
+              </div>
 
-              {/* Añadir tarjetas vacías si es necesario para completar la última fila */}
-              {audios.length % 3 === 2 && (
-                <div className="hidden xl:block"></div>
-              )}
-              {audios.length % 3 === 1 && (
-                <>
-                  <div className="hidden xl:block"></div>
-                  <div className="hidden xl:block"></div>
-                </>
-              )}
-            </div>
-          </section>
-        ))}
+              {/* Elemento decorativo de rayas */}
+              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-100 -z-10"></div>
+            </section>
+          ))}
+        </div>
       </div>
     </div>
   );
