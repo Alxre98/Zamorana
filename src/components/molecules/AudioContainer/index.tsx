@@ -6,9 +6,9 @@ import { useAudioPlayer } from "@/context/AudioPlayerContext";
 
 // Función para asegurar que la descripción tenga una longitud consistente
 const formatDescription = (desc: string) => {
-  if (!desc) return '';
+  if (!desc) return "";
   // Limitar la longitud de la descripción para mantener consistencia visual
-  return desc.length > 120 ? desc.substring(0, 117) + '...' : desc;
+  return desc.length > 120 ? desc.substring(0, 117) + "..." : desc;
 };
 
 interface AudioContainerProps {
@@ -34,7 +34,9 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration] = useState(180); // 3 minutos en segundos
   const progressContainerRef = useRef<HTMLDivElement>(null);
-  const playerId = useRef(`player-${Math.random().toString(36).substr(2, 9)}`).current;
+  const playerId = useRef(
+    `player-${Math.random().toString(36).substr(2, 9)}`
+  ).current;
 
   // Efecto para sincronizar el estado de reproducción con el contexto
   useEffect(() => {
@@ -54,11 +56,11 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
   // Actualizar el tiempo actual cuando el audio está reproduciéndose
   useEffect(() => {
     // Solo ejecutar en el cliente
-    if (typeof window === 'undefined') return;
-    
+    if (typeof window === "undefined") return;
+
     if (isPlaying) {
       const timer = setInterval(() => {
-        setCurrentTime(prev => {
+        setCurrentTime((prev) => {
           const newTime = prev + 0.5; // Actualizar cada 500ms
           if (newTime >= duration) {
             setIsPlaying(false);
@@ -90,14 +92,14 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
   // Manejar clic en la barra de progreso
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!progressContainerRef.current) return;
-    
+
     const rect = progressContainerRef.current.getBoundingClientRect();
     const clickPosition = (e.clientX - rect.left) / rect.width;
     const newProgress = Math.min(Math.max(clickPosition, 0), 1) * 100;
     setProgress(newProgress);
-    
+
     // Actualizar el tiempo actual basado en la posición del clic
-    const newTime = (clickPosition * duration);
+    const newTime = clickPosition * duration;
     setCurrentTime(newTime);
   };
 
@@ -105,17 +107,21 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   return (
-    <div className={`${styles.audioContainer} ${className} ${isPlaying ? styles.playing : ''}`}>
+    <div
+      className={`${styles.audioContainer} ${className} ${
+        isPlaying ? styles.playing : ""
+      }`}
+    >
       {/* Encabezado con título y metadatos */}
       <div className={styles.header}>
-        <h3 className={styles.title}>
-          {title}
-        </h3>
-        
+        <h3 className={styles.title}>{title}</h3>
+
         <div className={styles.metadata}>
           <span className={styles.timeOfDay}>{timeOfDay}</span>
           {location && <span className={styles.location}>{location}</span>}
@@ -125,15 +131,15 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
 
       {/* Descripción con longitud consistente */}
       <p className={styles.description}>
-        {description ? formatDescription(description) : '\u00A0'}
+        {description ? formatDescription(description) : "\u00A0"}
       </p>
 
       {/* Controles de reproducción */}
       <div className={styles.controls}>
-        <button 
-          className={`${styles.playButton} ${isPlaying ? styles.playing : ''}`} 
+        <button
+          className={`${styles.playButton} ${isPlaying ? styles.playing : ""}`}
           onClick={togglePlayPause}
-          aria-label={isPlaying ? 'Pausar' : 'Reproducir'}
+          aria-label={isPlaying ? "Pausar" : "Reproducir"}
         >
           <div className={styles.playIcon}>
             {isPlaying ? (
@@ -147,28 +153,49 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
           </div>
         </button>
 
-        <div 
+        <div
           ref={progressContainerRef}
           className={styles.progressContainer}
           onClick={handleProgressClick}
         >
-          <div 
-            className={styles.progressBar} 
+          <div
+            className={styles.progressBar}
             style={{ width: `${progress}%` }}
           ></div>
         </div>
-        <div className={styles.time}>{formatTime(currentTime)} / {formatTime(duration)}</div>
+        <div className={styles.time}>
+          {formatTime(currentTime)} / {formatTime(duration)}
+        </div>
       </div>
 
-      {/* Onda de sonido */}
+      {/* Onda de sonido profesional mejorada */}
       <div className={styles.soundwave}>
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div 
-            key={i} 
-            className={`${styles.soundwaveLine} ${i % 3 === 0 ? styles.soundwaveLineTall : i % 4 === 0 ? styles.soundwaveLineShort : ''}`}
-            style={{ '--delay': i * 0.05 } as React.CSSProperties}
-          />
-        ))}
+        <div className={styles.waveform}>
+          <div className={styles.waveGradient}></div>
+          <div className={styles.waveBars}>
+            {Array.from({ length: 48 }).map((_, i) => {
+              // Crear un patrón más orgánico para las alturas
+              const height = 15 + Math.sin(i * 0.5) * 20 + Math.random() * 15;
+              return (
+                <div
+                  key={i}
+                  className={`${styles.waveBar} ${styles[`bar${(i % 8) + 1}`]}`}
+                  style={
+                    {
+                      "--delay": `${i * 0.03}s`,
+                      "--height": `${height}%`,
+                      "--opacity": 0.3 + (i % 3) * 0.2,
+                      "--scale": 0.6 + (i % 5) * 0.1,
+                    } as React.CSSProperties
+                  }
+                >
+                  <div className={styles.waveBarInner}></div>
+                </div>
+              );
+            })}
+          </div>
+          <div className={styles.waveReflection}></div>
+        </div>
       </div>
     </div>
   );
