@@ -3,17 +3,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./AudioContainer.module.css";
 
-// Función auxiliar para obtener el ícono según la hora del día
-const getTimeOfDayIcon = (timeOfDay: string) => {
-  const icons: { [key: string]: string } = {
-    mañana: '🌅',
-    tarde: '🌇',
-    noche: '🌙',
-    amanecer: '🌄',
-    atardecer: '🌆',
-    madrugada: '🌠'
-  };
-  return icons[timeOfDay.toLowerCase()] || '🎵';
+// Función para asegurar que la descripción tenga una longitud consistente
+const formatDescription = (desc: string) => {
+  if (!desc) return '';
+  // Limitar la longitud de la descripción para mantener consistencia visual
+  return desc.length > 120 ? desc.substring(0, 117) + '...' : desc;
 };
 
 interface AudioContainerProps {
@@ -145,9 +139,6 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
       <div className={styles.header}>
         <h3 className={styles.title}>
           {title}
-          <span className={styles.titleIcon}>
-            {getTimeOfDayIcon(timeOfDay)}
-          </span>
         </h3>
         
         <div className={styles.metadata}>
@@ -157,8 +148,10 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
         </div>
       </div>
 
-      {/* Descripción */}
-      {description && <p className={styles.description}>{description}</p>}
+      {/* Descripción con longitud consistente */}
+      <p className={styles.description}>
+        {description ? formatDescription(description) : '\u00A0'}
+      </p>
 
       {/* Controles de reproducción */}
       <div className={styles.controls}>

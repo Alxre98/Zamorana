@@ -6,6 +6,10 @@
   overflow: hidden;
   width: 100%;
   margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px; /* Altura mínima para mantener consistencia */
+  height: 100%;
 }
 
 .audioContainer:hover {
@@ -25,6 +29,12 @@
   color: #111827;
   margin: 0 0 0.5rem 0;
   font-family: 'Georgia', serif;
+  min-height: 1.5em; /* Altura consistente para el título */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar el texto horizontalmente */
+  text-align: center; /* Asegurar que el texto esté centrado en caso de salto de línea */
+  padding: 0 1rem; /* Añadir un poco de padding a los lados */
 }
 
 .titleIcon {
@@ -41,6 +51,7 @@
   color: #4b5563;
   margin: 0.5rem 0 0;
   padding: 0 2rem;
+  min-height: 1.5em; /* Altura consistente para los metadatos */
 }
 
 .timeOfDay,
@@ -66,6 +77,10 @@
   font-size: 0.9375rem;
   border-bottom: 1px solid #e5e7eb;
   margin: 0;
+  flex-grow: 1;
+  min-height: 80px; /* Altura mínima para la descripción */
+  display: flex;
+  align-items: center;
 }
 
 /* Controles de reproducción */
@@ -180,14 +195,13 @@
 /* Onda de sonido */
 .soundwave {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  height: 40px;
-  margin: 0;
-  padding: 1.5rem 2rem;
-  background: #f9fafb;
-  border-top: 1px solid #e5e7eb;
+  height: 80px;
+  padding: 0 2rem 1.5rem;
+  background-color: #f9fafb;
   overflow: hidden;
+  flex-shrink: 0; /* Evita que se encoja */
 }
 
 .soundwaveLine {
