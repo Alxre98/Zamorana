@@ -1,7 +1,7 @@
 "use client";
 
 import { getFormattedDate } from "@/lib/utils";
-import AudioContainer from "@/components/molecules/AudioContainer";
+import { AudioContainer } from "@/components/molecules/AudioContainer";
 import { DigitalText } from "@/components/atoms/DigitalText";
 import styles from "./page.module.css";
 

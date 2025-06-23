@@ -1,0 +1,258 @@
+.audioContainer {
+  position: relative;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.audioContainer:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para el encabezado */
+.header {
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+  position: relative;
+  display: inline-block;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.audioContainer:hover .title::after {
+  transform: scaleX(1);
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #666666;
+  flex-wrap: wrap;
+}
+
+.separator {
+  color: #cccccc;
+}
+
+/* Estilos para la descripción */
+.description {
+  margin: 0 0 1.5rem 0;
+  color: #333333;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+}
+
+/* Controles de reproducción */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.playButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #000000;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.playButton:hover {
+  transform: scale(1.05);
+}
+
+.playButton:active {
+  transform: scale(0.95);
+}
+
+.playIcon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playTriangle {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-left: 12px solid #ffffff;
+  border-bottom: 8px solid transparent;
+  margin-left: 2px;
+}
+
+.pauseBar {
+  width: 3px;
+  height: 12px;
+  background-color: #ffffff;
+  margin: 0 1.5px;
+}
+
+/* Barra de progreso */
+.progressContainer {
+  flex: 1;
+  height: 4px;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #000000;
+  transition: width 0.1s linear;
+}
+
+.time {
+  font-size: 0.75rem;
+  color: #666666;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Onda de sonido */
+.soundwave {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 50px;
+  margin: 1.5rem 0 0.5rem;
+  position: relative;
+  z-index: 1;
+  padding: 0 0.5rem;
+}
+
+.soundwaveLine {
+  flex: 1;
+  background-color: #000000;
+  margin: 0 1px;
+  min-width: 2px;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Elementos decorativos */
+.decorativeLine {
+  position: absolute;
+  top: 20%;
+  right: -20px;
+  width: 60px;
+  height: 1px;
+  background-color: #000000;
+  transform: rotate(-15deg);
+  opacity: 0.1;
+}
+
+.decorativeScribble {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 80px;
+  height: 60px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.decorativeScribble::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 20px;
+  width: 40px;
+  height: 1px;
+  background-color: #000000;
+  transform: rotate(20deg);
+  opacity: 0.1;
+}
+
+/* Efectos de hover en elementos de sonido */
+.soundwave:hover .soundwaveLine {
+  opacity: 0.8;
+  transform: scaleY(1.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .audioContainer {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .metadata {
+    font-size: 0.8125rem;
+  }
+
+  .description {
+    font-size: 0.9375rem;
+  }
+
+  .soundwave {
+    height: 40px;
+  }
+}
+
+/* Animación para la onda de sonido */
+@keyframes soundwavePulse {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.5);
+  }
+}
+
+/* Aplicar animación cuando está reproduciendo */
+.playing .soundwaveLine {
+  animation: soundwavePulse 1.5s infinite ease-in-out;
+  animation-delay: calc(var(--i) * 0.05s);
+}
