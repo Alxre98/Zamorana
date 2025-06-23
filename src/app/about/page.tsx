@@ -26,9 +26,16 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="relative h-96 rounded-xl overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center">
-              <span className="text-6xl">🎵</span>
-            </div>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/Green Gradient Background.mp4" type="video/mp4" />
+              Tu navegador no soporta el elemento de video.
+            </video>
           </div>
         </div>
       </section>
