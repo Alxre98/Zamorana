@@ -21,6 +21,12 @@ export default function ContactPage() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error'; visible: boolean }>({ message: '', type: 'success', visible: false });
+
+  const showToast = (message: string, type: 'success' | 'error') => {
+    setToast({ message, type, visible: true });
+    setTimeout(() => setToast((t) => ({ ...t, visible: false })), 4000);
+  };
   const [showError, setShowError] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -106,12 +112,12 @@ export default function ContactPage() {
             formRef.current!,
             PUBLIC_KEY
           );
-          alert("¡Mensaje enviado con éxito!");
+          showToast("¡Mensaje enviado con éxito!", 'success');
           setFormData({ name: "", email: "", subject: "", message: "" });
           setShowError(false);
         } catch (error) {
           console.error(error);
-          alert("Hubo un error al enviar el mensaje. Intenta más tarde.");
+          showToast("Hubo un error al enviar el mensaje. Intenta más tarde.", 'error');
         }
       }
     } else {
@@ -323,6 +329,15 @@ export default function ContactPage() {
                     </svg>
                   </button>
                 </div>
+
+                {/* Toast */}
+      {toast.visible && (
+        <div
+          className={`fixed top-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded shadow-lg z-50 text-sm text-white animate-fade-in-down ${toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'}`}
+        >
+          {toast.message}
+        </div>
+      )}
 
                 {/* Mensaje de error general */}
                 {showError && Object.keys(errors).length > 0 && (
