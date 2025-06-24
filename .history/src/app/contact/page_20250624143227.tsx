@@ -4,14 +4,6 @@ import { ContactHero } from "@/components/organisms/ContactHero";
 import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 
-// EmailJS configuration (fallback to env vars or hard-coded defaults provided by user)
-const SERVICE_ID =
-  process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "service_os3f41n";
-const TEMPLATE_ID =
-  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "template_9k5x3fa";
-const PUBLIC_KEY =
-  process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "skO1Z3yRrBAdqVwSm";
-
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -101,10 +93,10 @@ export default function ContactPage() {
       if (formRef.current) {
         try {
           await emailjs.sendForm(
-            SERVICE_ID,
-            TEMPLATE_ID,
-            formRef.current!,
-            PUBLIC_KEY
+            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string,
+            process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string,
+            formRef.current,
+            process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string
           );
           alert("¡Mensaje enviado con éxito!");
           setFormData({ name: "", email: "", subject: "", message: "" });
