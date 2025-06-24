@@ -325,7 +325,7 @@ export default function ContactPage() {
                     <p className="text-xs font-medium text-gray-500 tracking-wider uppercase mb-1">
                       Email
                     </p>
-                    <p className="text-gray-700">contacto@zamorana.com</p>
+                    <p className="text-gray-700">zamorana.archivo@gmail.com</p>
                   </div>
                 </div>
 

@@ -51,26 +51,6 @@ const audioFiles: AudioFile[] = [
     date: getFormattedDate("15_06_2025"),
     path: "",
   },
-  {
-    id: "m4",
-    title: "Orilla del Lago Temprano",
-    description:
-      "Sonidos suaves de las olas golpeando la orilla al amanecer mientras las aves acuáticas saludan el nuevo día.",
-    timeOfDay: "Mañana",
-    location: "Lago de Valencia",
-    date: getFormattedDate("22_04_2025"),
-    path: "",
-  },
-  {
-    id: "m5",
-    title: "Páramo Andino Matutino",
-    description:
-      "El silbido del viento entre los frailejones y el canto lejano de aves de alta montaña durante el amanecer.",
-    timeOfDay: "Mañana",
-    location: "Páramo de Mucubají",
-    date: getFormattedDate("12_09_2025"),
-    path: "",
-  },
 
   // Mediodía
   {
@@ -83,47 +63,7 @@ const audioFiles: AudioFile[] = [
     date: getFormattedDate("16_10_2024"),
     path: "/audios/LaChurca_RíoPacairigua_CuencaAlta_TomaV2_161024_123910_Mediodía/audio.mp3",
   },
-  {
-    id: "md2",
-    title: "Plaza Central al Mediodía",
-    description:
-      "Ambiente vibrante de la plaza central con conversaciones, pasos y palomas revoloteando.",
-    timeOfDay: "Mediodía",
-    location: "Plaza Bolívar, Caracas",
-    date: getFormattedDate("20_05_2025"),
-    path: "",
-  },
-  {
-    id: "md3",
-    title: "Mercado Municipal Activo",
-    description:
-      "El bullicio del mercado con vendedores pregonando y compradores regateando precios de frutas frescas.",
-    timeOfDay: "Mediodía",
-    location: "Mercado de Chacao",
-    date: getFormattedDate("05_06_2025"),
-    path: "",
-  },
-  {
-    id: "md4",
-    title: "Olas del Caribe",
-    description:
-      "El relajante sonido de las olas rompiendo bajo el intenso sol caribeño acompañado de gaviotas.",
-    timeOfDay: "Mediodía",
-    location: "Playa Colorada",
-    date: getFormattedDate("15_07_2025"),
-    path: "",
-  },
-  {
-    id: "md5",
-    title: "Cascada en su Punto Máximo",
-    description:
-      "Caudal alto de la cascada golpeando las rocas, generando una niebla refrescante en el aire.",
-    timeOfDay: "Mediodía",
-    location: "Salto El Sapo, Canaima",
-    date: getFormattedDate("01_08_2025"),
-    path: "",
-  },
-  // Fin audios Mediodía
+  // Agrega más audios de mediodía...
 
   // Tarde
   {
@@ -136,47 +76,7 @@ const audioFiles: AudioFile[] = [
     date: getFormattedDate("08_11_2024"),
     path: "/audios/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV1_081124_125938_Tarde/audio.mp3",
   },
-  {
-    id: "t2",
-    title: "Crepúsculo en la Sabana",
-    description:
-      "El cantar de los grillos y el viento que sopla sobre el pasto seco al caer la tarde.",
-    timeOfDay: "Tarde",
-    location: "Los Llanos",
-    date: getFormattedDate("12_11_2024"),
-    path: "",
-  },
-  {
-    id: "t3",
-    title: "Bosque Nocturno Inicial",
-    description:
-      "Primeros sonidos nocturnos del bosque nuboso, con ranas y aves nocturnas emergiendo.",
-    timeOfDay: "Tarde",
-    location: "Sierra de San Luis",
-    date: getFormattedDate("18_12_2024"),
-    path: "",
-  },
-  {
-    id: "t4",
-    title: "Olas al Atardecer",
-    description:
-      "El ir y venir de las olas bajo la luz dorada del ocaso y las aves retornando a sus nidos.",
-    timeOfDay: "Tarde",
-    location: "Playa Cuyagua",
-    date: getFormattedDate("25_01_2025"),
-    path: "",
-  },
-  {
-    id: "t5",
-    title: "Cascada al Anochecer",
-    description:
-      "El rugir constante de una cascada iluminada por la luna y ecos de fauna nocturna cercana.",
-    timeOfDay: "Tarde",
-    location: "Parque Nacional Canaima",
-    date: getFormattedDate("03_02_2025"),
-    path: "",
-  },
-  // Fin audios Tarde/Noche
+  // Agrega más audios de tarde...
 ];
 
 // Agrupar audios por franja horaria
@@ -304,7 +204,7 @@ export default function ColeccionesPage() {
       </section>
 
       {/* Contenido de Colecciones */}
-      <div className="w-full px-4 sm:px-6 lg:px-16 py-16 md:py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="text-center mb-16">
           <h2 className="text-2xl md:text-3xl font-light text-gray-700 mb-4">
             Nuestra Colección
@@ -328,7 +228,7 @@ export default function ColeccionesPage() {
                 <div className="flex-grow h-px bg-gray-200 ml-4"></div>
               </div>
 
-              <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {audios.map((audio) => (
                   <AudioContainer
                     key={audio.id}
