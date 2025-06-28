@@ -20,161 +20,145 @@ interface AudioFile {
 
 // Datos de ejemplo para los audios
 const audioFiles: AudioFile[] = [
-  // Mañana
+  // Audios de Mañana (5)
   {
     id: "m1",
-    title: "Río Norte - Toma 1",
-    description:
-      "Sonidos del Río Norte en La Churca, capturando el fluir del agua entre las rocas y la vegetación circundante.",
+    title: "Amanecer en el Río",
+    description: "El suave fluir del río al amanecer, con el canto de las aves y el sonido del viento entre los árboles.",
+    timeOfDay: "Mañana",
+    location: "Río Pacairigua",
+    date: getFormattedDate("13_09_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV1_130924_111342_Mañana_LaChurca_RíoPacairigua_CuencaAlta_TomaV1_130924_111342_Mañana.mp3",
+  },
+  {
+    id: "m2",
+    title: "Pozo La Churca - Mañana",
+    description: "El sonido relajante del agua en el pozo durante las primeras horas de la mañana.",
     timeOfDay: "Mañana",
     location: "La Churca",
+    date: getFormattedDate("18_10_2024"),
+    path: "/audio/LaChurca_PozoLaChurca_RíoAguasales_CuencaBaja_TomaV1_181024_095753_Mañana_LaChurca_PozoLaChurca_RíoAguasales_CuencaBaja_TomaV1_181024_095753_Mañana.mp3",
+  },
+  {
+    id: "m3",
+    title: "Las Madamas - Mañana",
+    description: "El sonido del agua fluyendo en Las Madamas durante la mañana.",
+    timeOfDay: "Mañana",
+    location: "La Churca",
+    date: getFormattedDate("08_11_2024"),
+    path: "/audio/LaChurca_LasMadamas_RíoNorte_CuencaBaja_TomaV1_081124_101614_Mañana_LaChurca_LasMadamas_RíoNorte_CuencaBaja_TomaV1_081124_101614_Mañana.mp3",
+  },
+  {
+    id: "m4",
+    title: "La Antesala - Mañana",
+    description: "El sonido del agua en La Antesala durante las primeras horas del día.",
+    timeOfDay: "Mañana",
+    location: "La Churca",
+    date: getFormattedDate("08_11_2024"),
+    path: "/audio/LaChurca_LaAntesala_RíoNorte_CuencaBaja_TomaV1_081124_100241_Mañana_LaChurca_LaAntesala_RíoNorte_CuencaBaja_TomaV1_081124_100241_Mañana.mp3",
+  },
+  {
+    id: "m5",
+    title: "Río Pacairigua - Mañana 2",
+    description: "Otra toma del Río Pacairigua por la mañana, con el agua fluyendo suavemente.",
+    timeOfDay: "Mañana",
+    location: "Río Pacairigua",
+    date: getFormattedDate("13_09_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV2_130924_114035_Mañana_LaChurca_RíoPacairigua_CuencaAlta_TomaV2_130924_114035_Mañana.mp3",
+  },
+  
+  // Audios de Mediodía (5)
+  {
+    id: "md1",
+    title: "Río al Mediodía 1",
+    description: "El sonido del río Pacairigua al mediodía, con el agua fluyendo con fuerza.",
+    timeOfDay: "Mediodía",
+    location: "La Churca",
+    date: getFormattedDate("16_10_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV1_161024_122511_Mediodía_LaChurca_RíoPacairigua_CuencaAlta_TomaV1_161024_122511_Mediodía.mp3",
+  },
+  {
+    id: "md2",
+    title: "Río al Mediodía 2",
+    description: "Otra toma del río Pacairigua al mediodía, con el agua fluyendo con fuerza.",
+    timeOfDay: "Mediodía",
+    location: "La Churca",
+    date: getFormattedDate("16_10_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV2_161024_123910_Mediodía_LaChurca_RíoPacairigua_CuencaAlta_TomaV2_161024_123910_Mediodía.mp3",
+  },
+  {
+    id: "md3",
+    title: "Río al Mediodía 3",
+    description: "Tercera toma del río Pacairigua al mediodía, con el agua fluyendo con fuerza.",
+    timeOfDay: "Mediodía",
+    location: "La Churca",
+    date: getFormattedDate("16_10_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV3_161024_125236_Mediodía_LaChurca_RíoPacairigua_CuencaAlta_TomaV3_161024_125236_Mediodía.mp3",
+  },
+  {
+    id: "md4",
+    title: "Río al Mediodía 4",
+    description: "Cuarta toma del río Pacairigua al mediodía, con el agua fluyendo con fuerza.",
+    timeOfDay: "Mediodía",
+    location: "La Churca",
+    date: getFormattedDate("16_10_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV4_161024_130022_Tarde_LaChurca_RíoPacairigua_CuencaAlta_TomaV4_161024_130022_Tarde.mp3",
+  },
+  {
+    id: "md5",
+    title: "Río al Mediodía 5",
+    description: "Quinta toma del río Pacairigua al mediodía, con el agua fluyendo con fuerza.",
+    timeOfDay: "Mediodía",
+    location: "La Churca",
+    date: getFormattedDate("16_10_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV5_161024_131015_Tarde_LaChurca_RíoPacairigua_CuencaAlta_TomaV5_161024_131015_Tarde.mp3",
+  },
+  
+  // Audios de Tarde (5)
+  {
+    id: "t1",
+    title: "Cañón del Norte - Tarde",
+    description: "El sonido del agua en el Cañón del Norte durante la tarde.",
+    timeOfDay: "Tarde",
+    location: "Cañón del Norte",
     date: getFormattedDate("08_11_2024"),
     path: "/audio/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV1_081124_125938_Tarde_LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV1_081124_125938_Tarde.mp3",
   },
   {
-    id: "m2",
-    title: "Río Norte - Toma 2",
-    description:
-      "Segunda toma del Río Norte, capturando diferentes matices del flujo del agua en el cañón.",
-    timeOfDay: "Mañana",
-    location: "La Churca",
-    date: getFormattedDate("08_11_2024"),
-    path: "/audio/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV2_081124_130539_Tarde_LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV2_081124_130539_Tarde.mp3",
-  },
-  {
-    id: "m3",
-    title: "Río Norte - Toma 3",
-    description:
-      "Tercera toma del Río Norte, con variaciones en la intensidad del flujo de agua.",
-    timeOfDay: "Mañana",
-    location: "La Churca",
-    date: getFormattedDate("08_11_2024"),
-    path: "/audio/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV3_081124_130956_Tarde_LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV3_081124_130956_Tarde.mp3",
-  },
-  {
-    id: "m4",
-    title: "Río Norte - Toma 4",
-    description:
-      "Cuarta toma del Río Norte, capturando los sonidos más profundos del cañón.",
-    timeOfDay: "Mañana",
-    location: "La Churca",
-    date: getFormattedDate("08_11_2024"),
-    path: "/audio/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV4_081124_131750_Tarde_LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV4_081124_131750_Tarde.mp3",
-  },
-  {
-    id: "m5",
-    title: "Río Norte - Toma 5",
-    description:
-      "Quinta y última toma del Río Norte, completando la experiencia sonora del cañón.",
-    timeOfDay: "Mañana",
-    location: "La Churca",
-    date: getFormattedDate("08_11_2024"),
-    path: "/audio/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV5_081124_132240_Tarde_LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV5_081124_132240_Tarde.mp3",
-  },
-
-  // Mediodía
-  {
-    id: "md1",
-    title: "Río al Mediodía",
-    description:
-      "El sonido del río en su punto más activo del día, con el agua fluyendo vigorosamente entre las rocas.",
-    timeOfDay: "Mediodía",
-    location: "La Churca",
-    date: getFormattedDate("16_10_2024"),
-    path: "/audios/LaChurca_RíoPacairigua_CuencaAlta_TomaV2_161024_123910_Mediodía/audio.mp3",
-  },
-  {
-    id: "md2",
-    title: "Plaza Central al Mediodía",
-    description:
-      "Ambiente vibrante de la plaza central con conversaciones, pasos y palomas revoloteando.",
-    timeOfDay: "Mediodía",
-    location: "Plaza Bolívar, Caracas",
-    date: getFormattedDate("20_05_2025"),
-    path: "",
-  },
-  {
-    id: "md3",
-    title: "Mercado Municipal Activo",
-    description:
-      "El bullicio del mercado con vendedores pregonando y compradores regateando precios de frutas frescas.",
-    timeOfDay: "Mediodía",
-    location: "Mercado de Chacao",
-    date: getFormattedDate("05_06_2025"),
-    path: "",
-  },
-  {
-    id: "md4",
-    title: "Olas del Caribe",
-    description:
-      "El relajante sonido de las olas rompiendo bajo el intenso sol caribeño acompañado de gaviotas.",
-    timeOfDay: "Mediodía",
-    location: "Playa Colorada",
-    date: getFormattedDate("15_07_2025"),
-    path: "",
-  },
-  {
-    id: "md5",
-    title: "Cascada en su Punto Máximo",
-    description:
-      "Caudal alto de la cascada golpeando las rocas, generando una niebla refrescante en el aire.",
-    timeOfDay: "Mediodía",
-    location: "Salto El Sapo, Canaima",
-    date: getFormattedDate("01_08_2025"),
-    path: "",
-  },
-  // Fin audios Mediodía
-
-  // Tarde
-  {
-    id: "t1",
-    title: "Atardecer en el Cañón",
-    description:
-      "Los últimos rayos de sol iluminando el cañón con sonidos de aves nocturnas.",
-    timeOfDay: "Tarde",
-    location: "Cañón del Norte",
-    date: getFormattedDate("08_11_2024"),
-    path: "/audios/LaChurca_CañónDelNorte_RíoNorte_CuencaBaja_TomaV1_081124_125938_Tarde/audio.mp3",
-  },
-  {
     id: "t2",
-    title: "Crepúsculo en la Sabana",
-    description:
-      "El cantar de los grillos y el viento que sopla sobre el pasto seco al caer la tarde.",
+    title: "Cascada La Llovizna - Tarde",
+    description: "El sonido de la cascada La Llovizna al atardecer.",
     timeOfDay: "Tarde",
-    location: "Los Llanos",
-    date: getFormattedDate("12_11_2024"),
-    path: "",
+    location: "La Churca",
+    date: getFormattedDate("08_11_2024"),
+    path: "/audio/LaChurca_CascadaLaLlovizna_RíoNorte_CuencaBaja_TomaV1_081124_143510_Tarde_LaChurca_CascadaLaLlovizna_RíoNorte_CuencaBaja_TomaV1_081124_143510_Tarde.mp3",
   },
   {
     id: "t3",
-    title: "Bosque Nocturno Inicial",
-    description:
-      "Primeros sonidos nocturnos del bosque nuboso, con ranas y aves nocturnas emergiendo.",
+    title: "Cascada El Balcón - Tarde",
+    description: "El sonido de la cascada El Balcón en el Waraira Repano durante la tarde.",
     timeOfDay: "Tarde",
-    location: "Sierra de San Luis",
-    date: getFormattedDate("18_12_2024"),
-    path: "",
+    location: "Waraira Repano",
+    date: getFormattedDate("10_05_2025"),
+    path: "/audio/WarairaRepano_CascadaElBalcón1_RíoNorte_CuencaBaja_TomaV1_100525_125233_Tarde_WarairaRepano_CascadaElBalcón1_RíoNorte_CuencaBaja_TomaV1_100525_125233_Tarde.mp3",
   },
   {
     id: "t4",
-    title: "Olas al Atardecer",
-    description:
-      "El ir y venir de las olas bajo la luz dorada del ocaso y las aves retornando a sus nidos.",
+    title: "Río Pacairigua - Tarde 1",
+    description: "El sonido del río Pacairigua durante la tarde.",
     timeOfDay: "Tarde",
-    location: "Playa Cuyagua",
-    date: getFormattedDate("25_01_2025"),
-    path: "",
+    location: "La Churca",
+    date: getFormattedDate("16_10_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV6_161024_132258_Tarde_LaChurca_RíoPacairigua_CuencaAlta_TomaV6_161024_132258_Tarde.mp3",
   },
   {
     id: "t5",
-    title: "Cascada al Anochecer",
-    description:
-      "El rugir constante de una cascada iluminada por la luna y ecos de fauna nocturna cercana.",
+    title: "Río Pacairigua - Tarde 2",
+    description: "Otra toma del río Pacairigua durante la tarde.",
     timeOfDay: "Tarde",
-    location: "Parque Nacional Canaima",
-    date: getFormattedDate("03_02_2025"),
-    path: "",
+    location: "La Churca",
+    date: getFormattedDate("16_10_2024"),
+    path: "/audio/LaChurca_RíoPacairigua_CuencaAlta_TomaV7_161024_135155_Tarde_LaChurca_RíoPacairigua_CuencaAlta_TomaV7_161024_135155_Tarde.mp3",
   },
   // Fin audios Tarde/Noche
 ];

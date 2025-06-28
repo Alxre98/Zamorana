@@ -161,12 +161,14 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
         </div>
       </div>
 
-      <audio
-        ref={audioRef}
-        src={path}
-        preload="metadata"
-        className={styles.audioElement}
-      />
+      {path && (
+        <audio
+          ref={audioRef}
+          src={path}
+          preload="metadata"
+          className={styles.audioElement}
+        />
+      )}
 
       {/* Descripción con longitud consistente */}
       <p className={styles.description}>
