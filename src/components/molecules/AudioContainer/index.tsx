@@ -58,10 +58,11 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
     }
 
     // Limpiar al desmontar
+    const audio = audioRef.current;
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
       }
     };
   }, [isPlaying]);
@@ -79,7 +80,7 @@ const AudioContainer: React.FC<AudioContainerProps> = ({
         setIsPlaying(false);
       }
     }
-  }, [activePlayer, playerId]);
+  }, [activePlayer, playerId, isPlaying]);
 
   // Configurar el audio y manejar eventos
   useEffect(() => {
